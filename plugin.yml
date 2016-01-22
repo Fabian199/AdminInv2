@@ -1,0 +1,56 @@
+name: AdminInv
+version: 2.1
+main: de.Fabian996.AdminInv.Main.AdminMain
+author: Fabian996
+website: http://bit.ly/1m13hON
+depend: [Vault]
+
+commands:
+  admin:
+    description: Shows all Admin functions
+    Default: OP
+
+  climate:
+    description: GUI form Admin
+    
+  egm:
+    description: GUI form Admin
+    
+  diffis:
+    description: GUI form Admin
+    
+  ghast:
+    description: Give you Admin Item
+
+  adminhelp:
+    description: Show all commands form this Plugin
+        
+  warp:
+    description: This is the Warp command
+    aliases: [warps,delwarp,setwarp]
+    
+  afk:
+    description: This is the afk command
+    aliases: [back]
+  
+  ping:
+    description: You show your Ping(ms)
+  
+  pinfo:
+    description: Show PlayerInfo form one Player
+
+  invsee:
+    description: You show in a Player Inventory
+    
+  kick:
+    description: You can kick a Player
+    
+  br:
+    description: You can send a Broadcast Message
+    
+  spawn:
+    description: You set the Spawn Point
+    aliases: [setspawn]
+    
+  vote:
+    description: Show Vote Links
