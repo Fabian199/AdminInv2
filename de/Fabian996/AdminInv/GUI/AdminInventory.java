@@ -73,18 +73,12 @@ public class AdminInventory implements CommandExecutor {
 				
 				ItemStack Reload = new ItemStack(Material.SPONGE);
 				ItemMeta Reloadmeta = Reload.getItemMeta();
-				ArrayList<String> RL = new ArrayList<String>();
 				Reloadmeta.setDisplayName("§5Reload the Server");
-				RL.add("");
-				Reloadmeta.setLore(RL);
 				Reload.setItemMeta(Reloadmeta);
 				
 				ItemStack Stop = new ItemStack(Material.BARRIER);
 				ItemMeta Stopmeta = Stop.getItemMeta();
-				ArrayList<String> ST = new ArrayList<String>();
 				Stopmeta.setDisplayName("§4Stop the Server");
-				ST.add("");
-				Stopmeta.setLore(RL);
 				Stop.setItemMeta(Stopmeta);
 				
 				Inv.setItem(0, Heal);
