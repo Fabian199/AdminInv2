@@ -20,10 +20,12 @@ import de.Fabian996.AdminInv.Commands.afkCMD;
 import de.Fabian996.AdminInv.Function.AdminFunction;
 import de.Fabian996.AdminInv.Function.DifficultyFunction;
 import de.Fabian996.AdminInv.Function.GamemodeFunction;
+import de.Fabian996.AdminInv.Function.ServerFunction;
 import de.Fabian996.AdminInv.Function.WeatherFunction;
 import de.Fabian996.AdminInv.GUI.AdminInventory;
 import de.Fabian996.AdminInv.GUI.DiffiInv;
 import de.Fabian996.AdminInv.GUI.GamemodeInv;
+import de.Fabian996.AdminInv.GUI.ServerInventory;
 import de.Fabian996.AdminInv.GUI.WeatherInv;
 import de.Fabian996.AdminInv.Handler.AdminItem;
 import de.Fabian996.AdminInv.Handler.Ghast;
@@ -38,10 +40,10 @@ public class AdminMain extends JavaPlugin{
 	public void onEnable(){
 		System.out.println("[AdminInv] =================================");
 		System.out.println("[AdminInv] Author: " + getDescription().getAuthors());
-		System.out.println("[AdminInv] Version: v" + getDescription().getVersion());
-		System.out.println("[AdminInv] Website: " + getDescription().getWebsite());
-	    	System.out.println("[AdminInv] Status: Aktiviert");
-	    	System.out.println("[AdminInv] =================================");
+	    System.out.println("[AdminInv] Version: v" + getDescription().getVersion());
+	    System.out.println("[AdminInv] Website: " + getDescription().getWebsite());
+	    System.out.println("[AdminInv] Status: Aktiviert");
+	    System.out.println("[AdminInv] =================================");
 	    
 	    
 	    Metrics();
@@ -59,10 +61,10 @@ public class AdminMain extends JavaPlugin{
 		getCommand("climate").setExecutor(new WeatherInv());
 		getCommand("egm").setExecutor(new GamemodeInv());
 		getCommand("diffis").setExecutor(new DiffiInv());
-		
+		getCommand("server").setExecutor(new ServerInventory());
+
 		getCommand("adminhelp").setExecutor(new AdminHelp());
 		getCommand("warp").setExecutor(new WarpCMD());
-		//getCommand("home").setExecutor(new HomeCMD());
 
 		getCommand("ghast").setExecutor(new AdminItem());
 		getCommand("afk").setExecutor(new afkCMD());
@@ -74,6 +76,8 @@ public class AdminMain extends JavaPlugin{
 		getCommand("br").setExecutor(new BroadcastCMD());
 		getCommand("spawn").setExecutor(new SpawnCMD());
 		getCommand("vote").setExecutor(new VoteCMD());
+		
+		//getCommand("home").setExecutor(new HomeCMD());
 		//getCommand("msg").setExecutor(new msgCMD());
 		//getCommand("report").setExecutor(new ReportCMD());
 	}
@@ -87,6 +91,7 @@ public class AdminMain extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new WeatherFunction(), this);
 		getServer().getPluginManager().registerEvents(new GamemodeFunction(), this);
 		getServer().getPluginManager().registerEvents(new DifficultyFunction(), this);
+		getServer().getPluginManager().registerEvents(new ServerFunction(), this);
 		
 	}
 	
@@ -96,13 +101,12 @@ public class AdminMain extends JavaPlugin{
 	}
 	
 	public void onDisable()	{
-		
-		 System.out.println("[AdminInv] =================================");
-		 System.out.println("[AdminInv] Author: " + getDescription().getAuthors());
-		 System.out.println("[AdminInv] Version: v" + getDescription().getVersion());
-	         System.out.println("[AdminInv] Website: " + getDescription().getWebsite());
-		 System.out.println("[AdminInv] Status: Deaktiviert");
-		 System.out.println("[AdminInv] =================================");
+		System.out.println("[AdminInv] =================================");
+		System.out.println("[AdminInv] Author: " + getDescription().getAuthors());
+		System.out.println("[AdminInv] Version: v" + getDescription().getVersion());
+		System.out.println("[AdminInv] Website: " + getDescription().getWebsite());
+		System.out.println("[AdminInv] Status: Deaktiviert");
+		System.out.println("[AdminInv] =================================");
 	}
 
 	public void  Metrics(){
