@@ -9,15 +9,18 @@ commands:
   admin:
     description: Shows all Admin functions
     Default: OP
-
+  
+  server:
+    description: GUI form Admin Command
+    
   climate:
-    description: GUI form Admin
+    description: GUI form Admin Command
     
   egm:
-    description: GUI form Admin
+    description: GUI form Admin Command
     
   diffis:
-    description: GUI form Admin
+    description: GUI form Admin Command
     
   ghast:
     description: Give you Admin Item
