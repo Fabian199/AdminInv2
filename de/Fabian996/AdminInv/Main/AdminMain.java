@@ -8,11 +8,14 @@ import org.mcstats.Metrics;
 
 import de.Fabian996.AdminInv.Commands.AdminHelp;
 import de.Fabian996.AdminInv.Commands.BroadcastCMD;
+import de.Fabian996.AdminInv.Commands.ClearChatCMD;
 import de.Fabian996.AdminInv.Commands.InvseeCMD;
 import de.Fabian996.AdminInv.Commands.KickCMD;
 import de.Fabian996.AdminInv.Commands.PingCMD;
 import de.Fabian996.AdminInv.Commands.PlayerInfoCMD;
+import de.Fabian996.AdminInv.Commands.ServerInfoCMD;
 import de.Fabian996.AdminInv.Commands.SpawnCMD;
+import de.Fabian996.AdminInv.Commands.TeamChatCMD;
 import de.Fabian996.AdminInv.Commands.VoteCMD;
 import de.Fabian996.AdminInv.Commands.WarpCMD;
 import de.Fabian996.AdminInv.Commands.afkCMD;
@@ -61,7 +64,7 @@ public class AdminMain extends JavaPlugin{
 		getCommand("climate").setExecutor(new WeatherInv());
 		getCommand("egm").setExecutor(new GamemodeInv());
 		getCommand("diffis").setExecutor(new DiffiInv());
-		getCommand("server").setExecutor(new ServerInventory());
+		getCommand("serverinv").setExecutor(new ServerInventory());
 
 		getCommand("adminhelp").setExecutor(new AdminHelp());
 		getCommand("warp").setExecutor(new WarpCMD());
@@ -76,7 +79,10 @@ public class AdminMain extends JavaPlugin{
 		getCommand("br").setExecutor(new BroadcastCMD());
 		getCommand("spawn").setExecutor(new SpawnCMD());
 		getCommand("vote").setExecutor(new VoteCMD());
+		getCommand("sinfo").setExecutor(new ServerInfoCMD());
 		
+		getCommand("cc").setExecutor(new ClearChatCMD());
+		getCommand("tc").setExecutor(new TeamChatCMD());
 		//getCommand("home").setExecutor(new HomeCMD());
 		//getCommand("msg").setExecutor(new msgCMD());
 		//getCommand("report").setExecutor(new ReportCMD());
@@ -92,7 +98,6 @@ public class AdminMain extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new GamemodeFunction(), this);
 		getServer().getPluginManager().registerEvents(new DifficultyFunction(), this);
 		getServer().getPluginManager().registerEvents(new ServerFunction(), this);
-		
 	}
 	
 	public void registerConfig(){
