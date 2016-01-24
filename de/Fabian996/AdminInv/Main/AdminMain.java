@@ -41,12 +41,12 @@ public class AdminMain extends JavaPlugin{
 	Logger log = getLogger();
 	
 	public void onEnable(){
-		System.out.println("[AdminInv] =================================");
-		System.out.println("[AdminInv] Author: " + getDescription().getAuthors());
-	    System.out.println("[AdminInv] Version: v" + getDescription().getVersion());
-	    System.out.println("[AdminInv] Website: " + getDescription().getWebsite());
-	    System.out.println("[AdminInv] Status: Aktiviert");
-	    System.out.println("[AdminInv] =================================");
+	System.out.println("[AdminInv] =================================");
+	System.out.println("[AdminInv] Author: " + getDescription().getAuthors());
+	System.out.println("[AdminInv] Version: v" + getDescription().getVersion());
+	System.out.println("[AdminInv] Website: " + getDescription().getWebsite());
+	System.out.println("[AdminInv] Status: Aktiviert");
+	System.out.println("[AdminInv] =================================");
 	    
 	    
 	    Metrics();
@@ -106,12 +106,12 @@ public class AdminMain extends JavaPlugin{
 	}
 	
 	public void onDisable()	{
-		System.out.println("[AdminInv] =================================");
-		System.out.println("[AdminInv] Author: " + getDescription().getAuthors());
-		System.out.println("[AdminInv] Version: v" + getDescription().getVersion());
-		System.out.println("[AdminInv] Website: " + getDescription().getWebsite());
-		System.out.println("[AdminInv] Status: Deaktiviert");
-		System.out.println("[AdminInv] =================================");
+	System.out.println("[AdminInv] =================================");
+	System.out.println("[AdminInv] Author: " + getDescription().getAuthors());
+	System.out.println("[AdminInv] Version: v" + getDescription().getVersion());
+	System.out.println("[AdminInv] Website: " + getDescription().getWebsite());
+	System.out.println("[AdminInv] Status: Deaktiviert");
+	System.out.println("[AdminInv] =================================");
 	}
 
 	public void  Metrics(){
