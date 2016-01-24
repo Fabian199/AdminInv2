@@ -9,8 +9,8 @@ commands:
   admin:
     description: Shows all Admin functions
     Default: OP
-  
-  server:
+
+  serverinv:
     description: GUI form Admin Command
     
   climate:
@@ -22,6 +22,9 @@ commands:
   diffis:
     description: GUI form Admin Command
     
+  sinfo:
+    description: Show Server information
+  
   ghast:
     description: Give you Admin Item
 
@@ -57,3 +60,8 @@ commands:
     
   vote:
     description: Show Vote Links
+    
+  cc:
+    description: Clear the Server Chat
+    
+  tc:
