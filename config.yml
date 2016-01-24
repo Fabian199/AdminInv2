@@ -13,3 +13,8 @@ vote:
     message3: Link3
     message4: Link4
     message5: Link5
+    
+serverinfo:
+    website: Link
+    teamspeak: Ip
+    forum: Link
