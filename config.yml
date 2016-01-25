@@ -7,6 +7,7 @@
 
 Metrics:
     enable: true
+    
 vote:
     message1: Link1
     message2: Link2
@@ -18,3 +19,10 @@ serverinfo:
     website: Link
     teamspeak: Ip
     forum: Link
+    
+database:
+    mysql:
+      host: localhost
+      username: username
+      passwort: passwort
+      port: 3306
