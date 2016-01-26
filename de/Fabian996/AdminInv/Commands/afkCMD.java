@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 
 public class afkCMD implements CommandExecutor {
 
+	// Ist noch nicht perfekt entwickelt
+	
 	public ArrayList<String> AFK = new ArrayList<String>();
 	
 	public static final String Prefix = "§8[§4AdminInv§8]§r ";
