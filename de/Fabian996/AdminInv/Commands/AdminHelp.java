@@ -34,7 +34,10 @@ public class AdminHelp implements CommandExecutor {
 				p.sendMessage(Prefix + "§6/kick §7<player> §5[reason] §f - Show Player Info");
 				p.sendMessage(Prefix + "§6/br §5<message> §f - You can Broadcast Message send");
 				p.sendMessage(Prefix + "§6/vote §f - Show all Votelinks");
-				}
+				p.sendMessage(Prefix + "§6/sinfo §f - Show Server Information");
+				p.sendMessage(Prefix + "§6/tc §5<message> §f - You send message in the TeamChat");
+				p.sendMessage(Prefix + "§6/cc §f - Clear the Global Chat");
+			}
 		}
 	return true;
 	}
