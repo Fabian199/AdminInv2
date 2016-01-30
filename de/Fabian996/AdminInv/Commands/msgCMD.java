@@ -41,7 +41,6 @@ public class msgCMD implements CommandExecutor {
 			if(args.length >= 1){
 				if(msgCMD.LAST_MSG_SEND_TO.containsKey(cs.getName())){
 					CommandSender target;
-					CommandSender target1;
 					if(((String)msgCMD.LAST_MSG_SEND_TO.get(cs.getName())).equalsIgnoreCase("CONSOLE"))
 						target = Bukkit.getConsoleSender();
 					else{
@@ -70,7 +69,6 @@ public class msgCMD implements CommandExecutor {
 		cs.sendMessage(Prefix + "§4" + cs.getName() + " §7» §6" + target.getName() + " §8| §7" + Message);
 		target.sendMessage(Prefix + "§6" + cs.getName() + " §7» §4" + target.getName() + " §8| §7" + Message);
 		LAST_MSG_SEND_TO.put(cs.getName(), target.getName());
-		LAST_MSG_SEND_TO.put(target.getName(), cs.getName());
 		}catch(Exception e){
 		}
 	}
