@@ -9,22 +9,23 @@ import org.bukkit.entity.Player;
 public class ClearChatCMD implements CommandExecutor {
 
 	public static final String Prefix = "§8[§4AdminInv§8]§r ";
-	
-	@SuppressWarnings("unused")
+
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
-		if(cmd.getName().equalsIgnoreCase("cc")){
-			Player p = (Player)cs;
-			if(p.hasPermission("AdminInv.ClearChat")){
-				for( Player traget : Bukkit.getOnlinePlayers()){
-					for(int x = 0; x < 120; x++){
-						p.sendMessage(" ");
+	    if ((cs instanceof Player)) {
+	    	Player p = (Player)cs;
+	    	Boolean isConsole = Boolean.valueOf(true);
+	    	if(cmd.getName().equalsIgnoreCase("cc")){
+	    		if(p.hasPermission("AdminInv.ClearChat") || !isConsole.booleanValue()){
+	    			for( Player target : Bukkit.getOnlinePlayers()){
+	    				for(int i = 0; i < 120; i++){
+	    					target.sendMessage(" ");
+	    				}
+	    				target.sendMessage(Prefix + "§7Chat has been cleared by §6" + p.getName());
 					}
-					Bukkit.broadcastMessage(Prefix + "§7Chat has been cleared by §6" + p.getName());
-				}
-			}
-		}
-		return false;
+	    		}
+	    	}
+	    }
+	    return true;
 	}
-
 }
