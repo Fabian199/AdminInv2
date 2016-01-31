@@ -2,7 +2,7 @@ AdminInv V2.0
 --------------
 - Plugin completely rewritten
 - Better GUI-System
-- 1x Item of GUI-System in to the Config enable/disable whit true or false
+- 1 Item of GUI-System in to the Config enable/disable whit true or false
 - Vote and Server Information Configuriebar
   - New Commands:
     - /admin                        Permission: AdminInv.Admin
