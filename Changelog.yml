@@ -1,0 +1,29 @@
+AdminInv V2.0
+--------------
+- Plugin completely rewritten
+- Better GUI-System
+- 1x Item of GUI-System in to the Config enable/disable whit true or false
+- Vote and Server Information Configuriebar
+  - New Commands:
+    - /admin                        Permission: AdminInv.Admin
+    - /ghast                        Permission: AdminInv.AdminItem
+    - /afk and back                 Permission: --------------------
+    - /ahelp                        Permission: AdminInv.Help
+    - /phelp                        Permission: --------------------
+    - /invsee <player>              Permission: AdminInv.Invsee
+    - /kick <player> [reason]       Permission: AdminInv.Kick
+    - /pinfo <player>               Permission: AdminInv.PlayerInfo
+    - /ping                         Permission: --------------------
+    - /warp <warpname>              Permission: --------------------
+    - /warps                        Permission: --------------------
+    - /setwarp <warpname>           Permission: AdminInv.Warp
+    - /delwarp <warpname>           Permission: AdminInv.Warp
+    - /spawn                        Permission: --------------------
+    - /setspawn                     Permission: AdminInv.SetSpawn
+    - /br <message>                 Permission: AdminInv.Broadcast
+    - /vote                         Permission: --------------------
+    - /tc <message>                 Permission: AdminInv.TeamChat
+    - /sinfo                        Permission: --------------------
+    - /msg <player> <message>       Permission: --------------------
+    - /r <message>                  Permission: --------------------
+    
