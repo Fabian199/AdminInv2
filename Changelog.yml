@@ -4,6 +4,7 @@ AdminInv V2.0
 - Better GUI-System
 - 1 Item of GUI-System in to the Config enable/disable whit true or false
 - Vote and Server Information Configuriebar
+- These Plugins become need: [Vault]
   - New Commands:
     - /admin                        Permission: AdminInv.Admin
     - /ghast                        Permission: AdminInv.AdminItem
@@ -26,4 +27,4 @@ AdminInv V2.0
     - /sinfo                        Permission: --------------------
     - /msg <player> <message>       Permission: --------------------
     - /r <message>                  Permission: --------------------
-    
+    - /tp <player>                  Permission: --------------------
