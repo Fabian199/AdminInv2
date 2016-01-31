@@ -28,8 +28,11 @@ commands:
   ghast:
     description: Give you Admin Item
 
-  adminhelp:
+  ahelp:
     description: Show all commands form this Plugin
+    
+  phelp:
+    description: Show all commands of the Player
         
   warp:
     description: This is the Warp command
@@ -65,3 +68,13 @@ commands:
     description: Clear the Server Chat
     
   tc:
+    description: Use now the Server Team Chat
+    
+  msg:
+    description: You can send private message
+  
+  r:
+    description: You can send private message back 
+    
+  tp:
+    description: You can teleport to player 
