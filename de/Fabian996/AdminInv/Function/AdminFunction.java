@@ -2,7 +2,6 @@ package de.Fabian996.AdminInv.Function;
 
 import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -58,16 +57,16 @@ public class AdminFunction implements Listener {
 				e.getView().close();
 				p.performCommand("diffis");
 			}
-			
+
 			if(e.getCurrentItem().getType() == Material.SPONGE){
 				e.getView().close();
-				Bukkit.reload();
+				p.performCommand("rl");
 				p.sendMessage((Prefix + "§7%p%§2 §6has been Server Reload").replace("%p%",p.getName()));
 			}
 			
 			if(e.getCurrentItem().getType() == Material.BARRIER){
 				e.getView().close();
-				p.performCommand("server");
+				p.performCommand("serverinv");
 			}
 		}
 	}
