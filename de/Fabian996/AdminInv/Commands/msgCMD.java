@@ -34,41 +34,16 @@ public class msgCMD implements CommandExecutor {
 					cs.sendMessage(Prefix + "§cError: §6" + args[0] + " §cif is not online! ");
 				}
 			}else{
-				cs.sendMessage(Prefix + "§cUse: §3/" + label + " §6<message>");
-			}
-		}else if(label.equalsIgnoreCase("r")){
-			Player p = (Player)cs;
-			if(args.length >= 1){
-				if(msgCMD.LAST_MSG_SEND_TO.containsKey(cs.getName())){
-					CommandSender target;
-					if(((String)msgCMD.LAST_MSG_SEND_TO.get(cs.getName())).equalsIgnoreCase("CONSOLE"))
-						target = Bukkit.getConsoleSender();
-					else{
-						target = Bukkit.getPlayer((String)msgCMD.LAST_MSG_SEND_TO.get(cs.getName()));
-					}
-					if(target != null){
-						String Message = "";
-						for (int i = 0; i < args.length; i++) {
-							Message = Message + args[i] + " ";
-						}
-						SendMsg(cs, target, Message);
-					}else{
-						cs.sendMessage(Prefix + "§cYou cannot correspond yourself.");
-					}
-				}else{
-					cs.sendMessage(Prefix + "§cError: You have still written with nobody ");
-				}
-			}else{
-				cs.sendMessage(Prefix + "§cUse: §3/r §6 <message>");
+				cs.sendMessage(Prefix + "Use: §6/" + label + " §7<message>");
 			}
 		}
-		return true;
 	}
-	public void SendMsg(CommandSender cs, CommandSender target, String Message){
+	public static void SendMsg(CommandSender cs, CommandSender target, String Message){
 		try{
-		cs.sendMessage(Prefix + "§4" + cs.getName() + " §7» §6" + target.getName() + " §8| §7" + Message);
-		target.sendMessage(Prefix + "§6" + cs.getName() + " §7» §4" + target.getName() + " §8| §7" + Message);
+		cs.sendMessage(Prefix + "§2" + cs.getName() + " §7» §6" + target.getName() + " §8| §7" + Message);
+		target.sendMessage(Prefix + "§6" + cs.getName() + " §7» §2" + target.getName() + " §8| §7" + Message);
 		LAST_MSG_SEND_TO.put(cs.getName(), target.getName());
+		LAST_MSG_SEND_TO.put(target.getName(), cs.getName());
 		}catch(Exception e){
 		}
 	}
