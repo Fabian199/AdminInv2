@@ -80,7 +80,7 @@ public class AdminInventory implements CommandExecutor {
 				ItemMeta Stopmeta = Stop.getItemMeta();
 				Stopmeta.setDisplayName("§4Stop the Server");
 				Stop.setItemMeta(Stopmeta);
-				
+
 				Inv.setItem(0, Heal);
 				Inv.setItem(3, Weather);
 				Inv.setItem(4, GM);
