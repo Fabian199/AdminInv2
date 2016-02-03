@@ -3,6 +3,7 @@ package de.Fabian996.AdminInv.Commands;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,6 +13,7 @@ public class msgCMD implements CommandExecutor {
 	
 	public static final String Prefix = "§8[§4AdminInv§8]§r ";
 	public static final HashMap<String, String> LAST_MSG_SEND_TO = new HashMap<>();
+
 	
 	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
@@ -26,6 +28,7 @@ public class msgCMD implements CommandExecutor {
 						for(int i = 1; i < args.length; i++){
 							Message = Message + args[i] + " ";
 						}
+						Message = ChatColor.translateAlternateColorCodes('&', Message);
 						SendMsg(cs, target, Message);
 					}else{
 						cs.sendMessage(Prefix + "§cYou cannot correspond yourself.");
@@ -37,6 +40,7 @@ public class msgCMD implements CommandExecutor {
 				cs.sendMessage(Prefix + "Use: §6/" + label + " §7<message>");
 			}
 		}
+		return false;
 	}
 	public static void SendMsg(CommandSender cs, CommandSender target, String Message){
 		try{
