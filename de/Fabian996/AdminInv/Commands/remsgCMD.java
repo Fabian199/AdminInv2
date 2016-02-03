@@ -1,6 +1,7 @@
 package de.Fabian996.AdminInv.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,6 +29,7 @@ public class remsgCMD implements CommandExecutor {
 						for (int i = 0; i < args.length; i++) {
 							message = message + args[i] + " ";
 						}
+						message = ChatColor.translateAlternateColorCodes('&', message);
 						msgCMD.SendMsg(cs, target, message);
 					}else{
 						p.sendMessage(Prefix + "§cYou cannot correspond yourself.");
