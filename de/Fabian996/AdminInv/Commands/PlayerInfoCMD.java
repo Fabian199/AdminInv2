@@ -23,7 +23,7 @@ public class PlayerInfoCMD implements CommandExecutor {
 					cs.sendMessage(Prefix + "Player §6" + args[0] + "§f not found");
 				}else{
 					Location loc = target.getLocation();
-					if(cs.hasPermission("AdminInv.PlayerInfo")){
+					if(cs.hasPermission("AdminInv.PlayerInfo") || cs.hasPermission("AdminInv.*")){
 						cs.sendMessage(Prefix + "§6+----------------§7PlayerInfo§6-----------------+");	
 						cs.sendMessage(Prefix + "§cNick: §2" + target.getName());
 						cs.sendMessage(Prefix + "§cXp: §2" + target.getExp());
