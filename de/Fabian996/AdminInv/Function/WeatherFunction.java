@@ -15,7 +15,7 @@ public class WeatherFunction implements Listener {
 	@EventHandler
 	public void Inventory(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
-		if(e.getInventory().getName().equalsIgnoreCase("§0Weather Inventory")){
+		if(e.getInventory().getName().equalsIgnoreCase("§0Weather/Time Inventory")){
 			e.setCancelled(true);
 		
 			// Weather Function
@@ -43,6 +43,19 @@ public class WeatherFunction implements Listener {
 				e.getView().close();
 			}
 			
+			if(e.getCurrentItem().getType() == Material.DAYLIGHT_DETECTOR){
+				World world = p.getWorld();
+				p.getWorld().setTime(0);
+				p.sendMessage(Prefix + "In the §6" + world.getName() + " §fis now Day");
+				e.getView().close();
+			}
+			
+			if(e.getCurrentItem().getType() == Material.SOUL_SAND){
+				World world = p.getWorld();
+				p.getWorld().setTime(13000);
+				p.sendMessage(Prefix + "In the §6" + world.getName() + " §fis now Night");
+				e.getView().close();
+			}
 			
 			if(e.getCurrentItem().getType() == Material.GOLD_NUGGET){
 				e.getView().close();
