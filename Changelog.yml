@@ -1,4 +1,22 @@
-AdminInv V2.0
+AdminInv 2.1.1 Changelog
+    Runs on the server versions 1.7.x - 1.8.x​
+
+  Auto afk back by Move and Chat action
+  New Function in the Weather Inventory is, you can change the Time to Day and Night
+  New Function : Tab (Header and Footer) and Title and Join/Quit and Kick Message setting in the Config
+  New Command /gm [0/1/2/3]
+  New Command /rename - Item in the Hand for /rename
+  Permission for /gm is AdminInv.Gamemodme
+  Permission for /rename ist AdminInv.RenameItem
+  New Permission for all Command´s and more is AdminInv.*
+  New Item´s in the Admin Inventory
+  Config Reload and Extra Inventory
+  The Extra Inventory can you setting in the Config for Enable[true] or Disable[false]
+  And new Function by /ahelp is /ahelp warp
+
+
+
+AdminInv V2.1
 --------------
 - Plugin completely rewritten
 - Better GUI-System
