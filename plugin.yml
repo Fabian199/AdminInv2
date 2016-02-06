@@ -1,5 +1,5 @@
 name: AdminInv
-version: 2.1
+version: 2.1.1
 main: de.Fabian996.AdminInv.Main.AdminMain
 author: Fabian996
 website: http://bit.ly/1m13hON
@@ -21,7 +21,13 @@ commands:
     
   diffis:
     description: GUI form Admin Command
+  
+  extra:
+    description: GUI form Admin Command  
     
+  areload:
+    description: Reload the Config
+
   sinfo:
     description: Show Server information
   
@@ -40,7 +46,6 @@ commands:
     
   afk:
     description: This is the afk command
-    aliases: [back]
   
   ping:
     description: You show your Ping(ms)
@@ -78,3 +83,9 @@ commands:
     
   tp:
     description: You can teleport to player 
+    
+  rename:
+    description: You can the Item name change
+    
+  gm:
+    description: Change your gamemode  
