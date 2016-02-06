@@ -16,7 +16,7 @@ public class ClearChatCMD implements CommandExecutor {
 	    	Player p = (Player)cs;
 	    	Boolean isConsole = Boolean.valueOf(true);
 	    	if(cmd.getName().equalsIgnoreCase("cc")){
-	    		if(p.hasPermission("AdminInv.ClearChat") || !isConsole.booleanValue()){
+	    		if(p.hasPermission("AdminInv.ClearChat") || !isConsole.booleanValue() || p.hasPermission("AdminInv.*")){
 	    			for( Player target : Bukkit.getOnlinePlayers()){
 	    				for(int i = 0; i < 120; i++){
 	    					target.sendMessage(" ");
