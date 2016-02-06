@@ -11,6 +11,7 @@ public class remsgCMD implements CommandExecutor {
 	
 	public static final String Prefix = "§8[§4AdminInv§8]§r ";
 	
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
