@@ -20,9 +20,9 @@ public class WeatherInv implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = (Player)cs;
 		if(cmd.getName().equalsIgnoreCase("climate")){
-			if(p.hasPermission("AdminInv.Wetter")){
-				p.playSound(p.getLocation(), Sound.ENDERDRAGON_DEATH, 100.0F, 60.0F);
-				Wetter = p.getPlayer().getServer().createInventory(null, 18, "§0Weather Inventory");
+			if(p.hasPermission("AdminInv.Admin") || p.hasPermission("AdminInv.*")){
+				p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 10.0F, 6.0F);
+				Wetter = p.getPlayer().getServer().createInventory(null, 18, "§0Weather/Time Inventory");
 
 				ItemStack Storm = new ItemStack(Material.WATER_LILY);
 				ItemMeta Stormmeta = Storm.getItemMeta();
@@ -48,6 +48,17 @@ public class WeatherInv implements CommandExecutor {
 				Thunderingmeta.setLore(ThunderingM);
 				Thundering.setItemMeta(Thunderingmeta);
 				
+				ItemStack Day = new ItemStack(Material.DAYLIGHT_DETECTOR);
+				ItemMeta Daymeta = Day.getItemMeta();
+				Daymeta.setDisplayName("§eDay");
+				Day.setItemMeta(Daymeta);
+				
+				ItemStack Night = new ItemStack(Material.SOUL_SAND);
+				ItemMeta Nightmeta = Night.getItemMeta();
+				Nightmeta.setDisplayName("§1Night");
+				Night.setItemMeta(Nightmeta);
+				
+				
 				ItemStack Back = new ItemStack(Material.GOLD_NUGGET);
 				ItemMeta Backmeta = Back.getItemMeta();
 				ArrayList<String> BM = new ArrayList<String>();
@@ -59,6 +70,9 @@ public class WeatherInv implements CommandExecutor {
 				Wetter.setItem(3, Storm);
 				Wetter.setItem(4, Clear);
 				Wetter.setItem(5, Thundering);
+				
+				Wetter.setItem(7, Day);
+				Wetter.setItem(8, Night);
 				
 				Wetter.setItem(9, Back);
 				
