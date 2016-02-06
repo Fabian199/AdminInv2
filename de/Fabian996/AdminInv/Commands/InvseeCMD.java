@@ -17,7 +17,7 @@ public class InvseeCMD implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("invsee")){
 			Player p = (Player)cs;
 			if(args.length > 0){
-				if(p.hasPermission("AdminInv.Invsee")){
+				if(p.hasPermission("AdminInv.Invsee") || p.hasPermission("AdminInv.*")){
 					Player TargetP = Bukkit.getServer().getPlayer(args[0]);
 					if(Bukkit.getPlayer(args[0]) == null){
 						p.sendMessage(Prefix  + "§7The Player §8" + args[0] + " §7is not onlein");
@@ -32,7 +32,7 @@ public class InvseeCMD implements CommandExecutor {
 				cs.sendMessage(Prefix + "Use §6/invsee §3<player>");
 			}
 		}
-		return false;
+		return true;
 	}
 
 }
