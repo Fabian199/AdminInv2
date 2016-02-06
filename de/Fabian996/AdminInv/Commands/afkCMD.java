@@ -1,37 +1,39 @@
 package de.Fabian996.AdminInv.Commands;
 
-import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class afkCMD implements CommandExecutor {
+import de.Fabian996.AdminInv.Main.AdminMain;
 
-	// Ist noch nicht perfekt entwickelt
-	
-	public ArrayList<String> AFK = new ArrayList<String>();
+public class afkCMD implements CommandExecutor {
 	
 	public static final String Prefix = "§8[§4AdminInv§8]§r ";
 	
+	@SuppressWarnings("unused")
+	private final AdminMain plugin;
+	
+	public afkCMD(AdminMain plugin){
+		this.plugin = plugin;
+	}
+
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = (Player)cs;
-		if(label.equalsIgnoreCase("afk")){
-			p.setDisplayName("§8[§cAFK§8] §7" + p.getName());
-			p.setCustomName("§8[§cAFK§8] §7" + p.getName());
-			p.setPlayerListName("§8[§cAFK§8] §7" + p.getName());
-			p.setCustomNameVisible(true);
-			Bukkit.broadcastMessage(Prefix + p.getName() + "§f is now §4AFK");
-			}else if(label.equalsIgnoreCase("back")){
-				p.setDisplayName(p.getName());
-				p.setCustomName(p.getName());
-				p.setPlayerListName(p.getName());
+		if(args.length == 0){
+			if(AdminMain.afkPlayers.contains(p.getName())){
+				AdminMain.afkPlayers.remove(p.getName());
+			}else{
+				AdminMain.afkPlayers.add(p.getName());
+				p.setDisplayName("§8[§cAFK§8] §7" + p.getName());
+				p.setCustomName("§8[§cAFK§8] §7" + p.getName());
+				p.setPlayerListName("§8[§cAFK§8] §7" + p.getName());
 				p.setCustomNameVisible(true);
-				Bukkit.broadcastMessage(Prefix + p.getName() + "§f is now §aBack");
+				Bukkit.broadcastMessage(Prefix + p.getName() + "§f is now §4AFK");
 			}
+		}
 		return true;
 	}
 }
