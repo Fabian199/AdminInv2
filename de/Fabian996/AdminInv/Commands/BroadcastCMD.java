@@ -15,7 +15,7 @@ public class BroadcastCMD implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("br")){
 			Player p = (Player)cs;
-			if(p.hasPermission("AdminInv.Broadcast")){
+			if(p.hasPermission("AdminInv.Broadcast") || p.hasPermission("AdminInv.*")){
 				if(!(cs instanceof Player)){
 					cs.sendMessage("You are not a player!");
 					return true;
