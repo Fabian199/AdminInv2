@@ -69,11 +69,11 @@ public class PlayerEvents implements Listener {
 		
 		//Tablist Message
 		PlayerConnection connection = ((CraftPlayer)p).getHandle().playerConnection;
-	    IChatBaseComponent header = IChatBaseComponent.ChatSerializer.a("{'color': '" + cfg.getString("Header.Color") + "', 'text': '" + cfg.getString("Header.Text") + "'}");
-	    IChatBaseComponent footer = IChatBaseComponent.ChatSerializer.a("{'color': '" + cfg.getString("Footer.Color") + "', 'text': '" + cfg.getString("Footer.Text") + "'}");
-	    PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
-	    try{
-	        Field headerField = packet.getClass().getDeclaredField("a");
+		IChatBaseComponent header = IChatBaseComponent.ChatSerializer.a("{'color': '" + cfg.getString("Header.Color") + "', 'text': '" + cfg.getString("Header.Text") + "'}");
+		IChatBaseComponent footer = IChatBaseComponent.ChatSerializer.a("{'color': '" + cfg.getString("Footer.Color") + "', 'text': '" + cfg.getString("Footer.Text") + "'}");
+		PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
+	    	try{
+		Field headerField = packet.getClass().getDeclaredField("a");
 	        headerField.setAccessible(true);
 	        headerField.set(packet, header);
 	        headerField.setAccessible(!headerField.isAccessible());
@@ -85,7 +85,7 @@ public class PlayerEvents implements Listener {
 	    }catch(Exception ex){
 	    	ex.printStackTrace();
 	    }
-	    connection.sendPacket(packet);
+	    	connection.sendPacket(packet);
 	    
 	    //Join Message
 	    String JoinMessage = cfg.getString("Message.JoinMessage");
