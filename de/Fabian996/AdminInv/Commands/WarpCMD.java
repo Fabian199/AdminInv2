@@ -35,7 +35,7 @@ public class WarpCMD implements CommandExecutor {
 					String str = "warps." + args[0].toLowerCase() + ".";
 					World w = Bukkit.getWorld(this.cfg.getString(str + "world"));
 					if(w == null){
-						p.sendMessage(Prefix + "§4Der Warp liegt in einer unbekannten Welt");
+						p.sendMessage(Prefix + "§4The warp is in an unknown world");
 						return true;
 					}
 					double x = this.cfg.getDouble(str + "x");
@@ -45,7 +45,7 @@ public class WarpCMD implements CommandExecutor {
 					double pitch = this.cfg.getDouble(str + "pitch");
 					Location loc = new Location(w, x, y, z, (float)yaw, (float)pitch);
 					p.teleport(loc);
-					cs.sendMessage(Prefix + "§2Du wurdest zum Warp §6" + args[0].toLowerCase() + "§2 teleportiert");
+					cs.sendMessage(Prefix + "§2You were to Warp§6" + args[0].toLowerCase() + "§2 teleport");
 				}else{
 					cs.sendMessage(Prefix + this.err_need_argument);
 				}
@@ -54,7 +54,7 @@ public class WarpCMD implements CommandExecutor {
 			}
 		}else if(label.equalsIgnoreCase("setwarp")){
 			if(p != null){
-				if(p.hasPermission("AdminInv.Warp")){
+				if(p.hasPermission("AdminInv.Warp") || p.hasPermission("AdminInv.*")){
 					if(args.length == 1){
 						Location loc = p.getLocation();
 						String str = "warps." + args[0].toLowerCase() + ".";
@@ -66,7 +66,7 @@ public class WarpCMD implements CommandExecutor {
 						this.cfg.set(str + "pitch", loc.getPitch());
 						try {
 							this.cfg.save(this.file);
-							cs.sendMessage(Prefix + "§2Warp §6" + args[0].toLowerCase() + "§2 erfolgreich gesetzt");
+							cs.sendMessage(Prefix + "§2Warp §6" + args[0].toLowerCase() + "§2 successfully set");
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -79,11 +79,11 @@ public class WarpCMD implements CommandExecutor {
 				}
 		}else if (label.equalsIgnoreCase("delwarp")){
 			if(args.length == 1){
-				if(p.hasPermission("AdminInv.Warp")){
+				if(p.hasPermission("AdminInv.Warp") || p.hasPermission("AdminInv.*")){
 					this.cfg.set("warps." + args[0].toLowerCase(), null);
 					try {
 						this.cfg.save(file);
-						cs.sendMessage(Prefix + "§2Warp §6" + args[0].toLowerCase() + "§2 erfolgreich gelöscht");
+						cs.sendMessage(Prefix + "§2Warp §6" + args[0].toLowerCase() + "§2 successfully deleted");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
