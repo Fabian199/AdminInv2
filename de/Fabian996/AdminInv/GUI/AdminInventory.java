@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import de.Fabian996.AdminInv.Main.AdminMain;
 
@@ -19,7 +20,11 @@ public class AdminInventory implements CommandExecutor {
 	@SuppressWarnings("unused")
 	private static AdminMain instance;
 
+	public static final String Prefix = "§8[§4AdminInv§8]§r ";
+	private String NoPerm = "§4You do have not Permission to do that";
+	
 	public Inventory Inv = null;
+
 	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
@@ -29,7 +34,7 @@ public class AdminInventory implements CommandExecutor {
 				pl.playSound(pl.getLocation(), Sound.FIREWORK_BLAST, 100.0F, 16.0F);
 				Inv = pl.getPlayer().getServer().createInventory(null, 27, "§0Admin Inventory");
 				// Inventar Erstellt...
-					
+				
 				// Icons im Inventar festlegen..
 				ItemStack Heal = new ItemStack(Material.POTION);
 				ItemMeta Healmeta = Heal.getItemMeta();
@@ -93,6 +98,13 @@ public class AdminInventory implements CommandExecutor {
 				ItemMeta Stopmeta = Stop.getItemMeta();
 				Stopmeta.setDisplayName("§4Stop the Server");
 				Stop.setItemMeta(Stopmeta);
+				
+				ItemStack PlayerSkull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+				SkullMeta PlayerSkullmeta = (SkullMeta) PlayerSkull.getItemMeta();
+				PlayerSkullmeta.setOwner(cs.getName());
+				PlayerSkullmeta.setDisplayName("§5Online Player´s");
+				PlayerSkull.setItemMeta(PlayerSkullmeta);
+			
 
 				Inv.setItem(0, Heal);
 				Inv.setItem(3, Weather);
@@ -100,12 +112,16 @@ public class AdminInventory implements CommandExecutor {
 				Inv.setItem(5, Diffi);
 				Inv.setItem(8, Fly);
 				
-				Inv.setItem(18, ConfigReload);						
+				Inv.setItem(18, ConfigReload);			
 				Inv.setItem(21 , Reload);
 				Inv.setItem(22, Extra);
 				Inv.setItem(23 , Stop);
+				
+				Inv.setItem(26, PlayerSkull);
 						
 				pl.getPlayer().openInventory(Inv);
+			}else{
+				cs.sendMessage(Prefix + NoPerm);
 			}
 		}		
 		return false;
