@@ -1,7 +1,6 @@
 package de.Fabian996.AdminInv.Function;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,25 +15,23 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class AdminFunction implements Listener {
 	
 	public static final String Prefix = "§8[§4AdminInv§8]§r ";
+	
+	//Config
 	private File file = new File("plugins/AdminInv", "config.yml");
 	private FileConfiguration cfg = YamlConfiguration.loadConfiguration(this.file);
-	
-
-	@SuppressWarnings("unused")
-	private ArrayList<Player> vanished = new ArrayList<>();
 
 	@EventHandler
 	public void Inventory(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
 		if(e.getInventory().getName().equalsIgnoreCase("§0Admin Inventory")){
 			e.setCancelled(true);
-		
+
 			// Heal Function
 			if(e.getCurrentItem().getType() == Material.POTION){
 				p.setHealth(20);
 				p.setFoodLevel(20);
-				p.setNoDamageTicks(Integer.valueOf(10));
-				p.sendMessage(Prefix + "§3You were cured");
+				p.getActivePotionEffects().clear();
+				p.sendMessage(Prefix + "&eYou were cured");
 				e.getView().close();
 			}
 			
@@ -43,11 +40,11 @@ public class AdminFunction implements Listener {
 	            if (p.getAllowFlight()) {
 		              p.setFlying(false);
 		              p.setAllowFlight(false);
-		              p.sendMessage(Prefix + "§cFly disabled");
+		              p.sendMessage(Prefix + "&2Fly Disabled");
 		            } else {
 		              p.setAllowFlight(true);
 		              p.setFlySpeed(0.1F);
-		              p.sendMessage(Prefix + "§2Fly Enabled");		              
+		              p.sendMessage(Prefix + "&4Fly Enabled");		              
 		            }
 				e.getView().close();
 			}
@@ -59,7 +56,7 @@ public class AdminFunction implements Listener {
 			
 			if(e.getCurrentItem().getType() == Material.PACKED_ICE){
 				e.getView().close();
-				p.performCommand("egm");
+				p.performCommand("egms");
 			}
 			
 			if(e.getCurrentItem().getType() == Material.CACTUS){
@@ -81,11 +78,11 @@ public class AdminFunction implements Listener {
 				e.getView().close();
 				p.performCommand("rl");
     			for( Player target : Bukkit.getOnlinePlayers()){
-    				for(int i = 0; i < 120; i++){
+    				for(int i = 0; i < 80; i++){
     					target.sendMessage(" ");
     				}
     				target.sendMessage(Prefix + "§7Chat has been cleared");
-    				}
+    			}
 			}
 			
 			if(e.getCurrentItem().getType() == Material.BOOK_AND_QUILL){
@@ -96,6 +93,11 @@ public class AdminFunction implements Listener {
 			if(e.getCurrentItem().getType() == Material.BARRIER){
 				e.getView().close();
 				p.performCommand("serverinv");
+			}
+			
+			if(e.getCurrentItem().getType() == Material.SKULL_ITEM){
+				e.getView().close();
+				p.performCommand("onlinep");
 			}
 		}
 	}
