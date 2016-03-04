@@ -19,8 +19,8 @@ public class GamemodeInv implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = (Player)cs;
-		if(cmd.getName().equalsIgnoreCase("egm")){
-			if(p.hasPermission("AdminInv.Gamemode")){
+		if(cmd.getName().equalsIgnoreCase("egms")){
+			if(p.hasPermission("AdminInv.Admin") || p.hasPermission("AdminInv.*")){
 				p.playSound(p.getLocation(), Sound.ARROW_HIT, 1000.0F, 6.0F);
 				Gamemode = p.getPlayer().getServer().createInventory(null, 18, "§0Gamemode Inventory");
 				// Inventar Erstellt...
