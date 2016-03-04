@@ -20,7 +20,7 @@ public class DiffiInv implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = (Player)cs;
 		if(cmd.getName().equalsIgnoreCase("diffis")){
-			if(p.hasPermission("AdminInv.Diffi")){
+			if(p.hasPermission("AdminInv.Admin") || p.hasPermission("AdminInv.*")){
 				p.playSound(p.getLocation(), Sound.GHAST_FIREBALL, 1000.0F, 6.0F);
 				Diffi = p.getPlayer().getServer().createInventory(null, 18, "§0Difficulty Inventory");
 				// Inventar Erstellt...
