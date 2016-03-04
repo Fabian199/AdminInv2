@@ -5,18 +5,24 @@ import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import de.Fabian996.AdminInv.Commands.BanCMD;
 import de.Fabian996.AdminInv.Main.AdminMain;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerListHeaderFooter;
@@ -26,7 +32,6 @@ import net.minecraft.server.v1_8_R3.PlayerConnection;
 @SuppressWarnings("deprecation")
 public class PlayerEvents implements Listener {
 
-	@SuppressWarnings("unused")
 	private final AdminMain plugin;
 	
 	public static final String Prefix = "§8[§4AdminInv§8]§r ";
@@ -48,7 +53,9 @@ public class PlayerEvents implements Listener {
 			p.setCustomNameVisible(true);
 			Bukkit.broadcastMessage(Prefix + p.getName() + "§f is now §aBack");
 		}
-	}	
+	}
+	
+
 
 	@EventHandler
 	public void onChatMessage(PlayerChatEvent e){
@@ -63,17 +70,64 @@ public class PlayerEvents implements Listener {
 		}
 	}
 	
-	@EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+        String msg = e.getMessage();
+        for (String word : plugin.blacklist) {
+            msg = msg.replaceAll("(?i)" + word, "§7*********");
+        }
+        e.setMessage(msg);
+        
+		Player p = e.getPlayer();
+		if(p.hasPermission("AdminInv.ChatColor")){
+			String msg1 = e.getMessage();
+			for(Player OPlayers : Bukkit.getOnlinePlayers()) {
+				if(OPlayers.getWorld() == p.getWorld()) {
+					OPlayers.sendMessage(p.getName() + " >> " + ChatColor.translateAlternateColorCodes('&', msg1));
+					e.setCancelled(true);
+				}
+			}
+		}
+		if(AdminMain.Mute){
+			if((!p.isOp()) || p.hasPermission("AdminInv.Mute")){
+				e.setCancelled(true);
+			}else{
+				e.setCancelled(false);
+			}
+		}
+    }
+
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onJoinServer(PlayerJoinEvent e){
 		Player p = e.getPlayer();
+
+		//Join Item
+		ItemStack AdminInv = new ItemStack(Material.GHAST_TEAR);
+		ItemMeta AdminInvmeta = AdminInv.getItemMeta();
+		AdminInvmeta.setDisplayName("§4Admin Inventory");
+		AdminInv.setItemMeta(AdminInvmeta);
+		
+		ItemStack Server_GUI = new ItemStack(Material.NAME_TAG);
+		ItemMeta Server_GUImeta = Server_GUI.getItemMeta();
+		Server_GUImeta.setDisplayName("§6Alpen-Games System");
+		Server_GUI.setItemMeta(Server_GUImeta);
+		
+		p.getInventory().setItem(0, AdminInv);
+		p.getInventory().setItem(8, Server_GUI);
+		
+        //Ban System
+        if(BanCMD.cfg.getBoolean("AdminInv.BanSystem.Ban." +  p.getName())){
+            String Reason = BanCMD.cfg.getString("AdminInv.BanSystem.Ban.Reason." + p.getName());
+            p.kickPlayer("§4You are Permanently blocked \n" + "§6Reason: §7 " +  Reason);
+        }
 		
 		//Tablist Message
 		PlayerConnection connection = ((CraftPlayer)p).getHandle().playerConnection;
-		IChatBaseComponent header = IChatBaseComponent.ChatSerializer.a("{'color': '" + cfg.getString("Header.Color") + "', 'text': '" + cfg.getString("Header.Text") + "'}");
-		IChatBaseComponent footer = IChatBaseComponent.ChatSerializer.a("{'color': '" + cfg.getString("Footer.Color") + "', 'text': '" + cfg.getString("Footer.Text") + "'}");
-		PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
-	    	try{
-		Field headerField = packet.getClass().getDeclaredField("a");
+	    IChatBaseComponent header = IChatBaseComponent.ChatSerializer.a("{'color': '" + cfg.getString("Header.Color") + "', 'text': '" + cfg.getString("Header.Text") + "'}");
+	    IChatBaseComponent footer = IChatBaseComponent.ChatSerializer.a("{'color': '" + cfg.getString("Footer.Color") + "', 'text': '" + cfg.getString("Footer.Text") + "'}");
+	    PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
+	    try{
+	        Field headerField = packet.getClass().getDeclaredField("a");
 	        headerField.setAccessible(true);
 	        headerField.set(packet, header);
 	        headerField.setAccessible(!headerField.isAccessible());
@@ -85,7 +139,8 @@ public class PlayerEvents implements Listener {
 	    }catch(Exception ex){
 	    	ex.printStackTrace();
 	    }
-	    	connection.sendPacket(packet);
+	    connection.sendPacket(packet);
+	    
 	    
 	    //Join Message
 	    String JoinMessage = cfg.getString("Message.JoinMessage");
@@ -101,10 +156,10 @@ public class PlayerEvents implements Listener {
 	@EventHandler
 	public void onQuitServer(PlayerQuitEvent e) throws EventException{
 		Player p = e.getPlayer();
-			String QuitMessage = cfg.getString("Message.QuitMessage");
-			QuitMessage = QuitMessage.replace("%player%", p.getName());
-			e.setQuitMessage(ChatColor.translateAlternateColorCodes('&', QuitMessage));
-
+		//Quit Message
+		String QuitMessage = cfg.getString("Message.QuitMessage");
+		QuitMessage = QuitMessage.replace("%player%", p.getName());
+		e.setQuitMessage(ChatColor.translateAlternateColorCodes('&', QuitMessage));
 	}
 	
 	public static void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String title, String subtitle){
