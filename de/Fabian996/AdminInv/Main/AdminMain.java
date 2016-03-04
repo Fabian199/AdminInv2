@@ -1,23 +1,35 @@
 package de.Fabian996.AdminInv.Main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
 import de.Fabian996.AdminInv.Commands.AdminHelp;
+import de.Fabian996.AdminInv.Commands.BanCMD;
 import de.Fabian996.AdminInv.Commands.BroadcastCMD;
 import de.Fabian996.AdminInv.Commands.ClearChatCMD;
 import de.Fabian996.AdminInv.Commands.GamemodeCMD;
+import de.Fabian996.AdminInv.Commands.GlobalMute;
+import de.Fabian996.AdminInv.Commands.HealCMD;
 import de.Fabian996.AdminInv.Commands.HelpCMD;
 import de.Fabian996.AdminInv.Commands.InvseeCMD;
 import de.Fabian996.AdminInv.Commands.KickCMD;
-//import de.Fabian996.AdminInv.Commands.OntimeCMD;
 import de.Fabian996.AdminInv.Commands.PingCMD;
 import de.Fabian996.AdminInv.Commands.PlayerInfoCMD;
 import de.Fabian996.AdminInv.Commands.ReNameCMD;
@@ -25,36 +37,64 @@ import de.Fabian996.AdminInv.Commands.ServerInfoCMD;
 import de.Fabian996.AdminInv.Commands.SpawnCMD;
 import de.Fabian996.AdminInv.Commands.TeamChatCMD;
 import de.Fabian996.AdminInv.Commands.TeleportCMD;
-//import de.Fabian996.AdminInv.Commands.TestCMD;
 import de.Fabian996.AdminInv.Commands.VoteCMD;
 import de.Fabian996.AdminInv.Commands.WarpCMD;
 import de.Fabian996.AdminInv.Commands.afkCMD;
 import de.Fabian996.AdminInv.Commands.msgCMD;
 import de.Fabian996.AdminInv.Commands.remsgCMD;
+import de.Fabian996.AdminInv.Commands.unbanCMD;
+import de.Fabian996.AdminInv.Commands.vanishCMD;
 import de.Fabian996.AdminInv.Events.PlayerEvents;
 import de.Fabian996.AdminInv.Function.AdminFunction;
 import de.Fabian996.AdminInv.Function.DifficultyFunction;
 import de.Fabian996.AdminInv.Function.ExtraFunction;
 import de.Fabian996.AdminInv.Function.GamemodeFunction;
+import de.Fabian996.AdminInv.Function.OnlinePlayerFunction;
 import de.Fabian996.AdminInv.Function.ServerFunction;
 import de.Fabian996.AdminInv.Function.WeatherFunction;
 import de.Fabian996.AdminInv.GUI.AdminInventory;
 import de.Fabian996.AdminInv.GUI.DiffiInv;
 import de.Fabian996.AdminInv.GUI.ExtraInv;
 import de.Fabian996.AdminInv.GUI.GamemodeInv;
+import de.Fabian996.AdminInv.GUI.OnlinePlayerInv;
 import de.Fabian996.AdminInv.GUI.ServerInventory;
 import de.Fabian996.AdminInv.GUI.WeatherInv;
 import de.Fabian996.AdminInv.Handler.AdminItem;
 import de.Fabian996.AdminInv.Handler.Ghast;
 import de.Fabian996.AdminInv.Listener.Blocken;
 
-public class AdminMain extends JavaPlugin{
+public class AdminMain extends JavaPlugin implements Listener,CommandExecutor{
 
+	//Allgemein AdminInv
 	private static AdminMain instance;
 	
+	AdminMain Main;
+	
+	public Server SERVER = getServer();
+	public ConsoleCommandSender CONSOLE = this.SERVER.getConsoleSender();
+	
 	public static final ArrayList<String> afkPlayers = new ArrayList<>();
+	public static final ArrayList<String> ServerTeam = new ArrayList<>();
+	public ArrayList<String> blacklist = new ArrayList<String>();
+
+	public static boolean Mute = false;
+	
+	//private MySQL mysql;
+	
+	//CommandSpy
+	public static final ArrayList<String> CommandSpy = new ArrayList<>();
+	
+	public static final String AdminPrefix = "§8[§4AdminInv§8]§r ";
+	public static final String SpyPrefix = "§8[§3AdminSpy§8]§r ";
+	
+	public String NoPerm = "You do have not Permission to do that";
+	public String NoPlayer = "You must be a Player'";
 	
 	
+	//Spy Command
+	public String Spy = "§7>> §aNow you can see Commands";
+	public String NoSpy = "§7>> §cYou can no longer see Commands";
+	public String Correct_Use = "Use: §3/aspy ";
 	
 	Logger log = getLogger();
 	
@@ -73,23 +113,21 @@ public class AdminMain extends JavaPlugin{
 	    registerCommands();
 	    registerListener();
 	    registerGUI();
+	    registerBlacklist();
+	//    ConnectMySQL();
 	    
-	    //registerMySQLBank();
-	    
-
 	    //registerLibrary();  | coming soon
 	    //registerLanguage(); | coming soon
 	}
 
-	//private void registerMySQLBank() {
-		//if(getConfig().getBoolean("MySQL.Use_MySQL")){
-		//	String hostname = getConfig().getString("MySQL.hostname");
-		//	String portnmbr = getConfig().getString("MySQL.portnmbr");
-		//	String database = getConfig().getString("MySQL.database");
-		//	String username = getConfig().getString("MySQL.username");
-		//	String password = getConfig().getString("MySQL.password");
-			
-	//	}
+	//public MySQL getMySQL(){
+	//	   return mysql;
+	//}
+	
+	//public void ConnectMySQL() {
+	//	mysql = new MySQL("IP", "The database","Your username", "Your password");
+	//	PreparedStatement statement = (PreparedStatement) mysql.prepareStatement("");
+	//	mysql.update(statement);
 	//}
 
 	private void registerReloadConfig() {
@@ -120,21 +158,24 @@ public class AdminMain extends JavaPlugin{
 		getCommand("tp").setExecutor(new TeleportCMD());
 		getCommand("rename").setExecutor(new ReNameCMD());
 		
-		getCommand("gm").setExecutor(new GamemodeCMD());
+		getCommand("egm").setExecutor(new GamemodeCMD());
+		getCommand("heal").setExecutor(new HealCMD());
+		getCommand("aban").setExecutor(new BanCMD());
+		getCommand("aunban").setExecutor(new unbanCMD());
+		getCommand("aspy").setExecutor(this);
+		getCommand("amute").setExecutor(new GlobalMute());
 		
-		//getCommand("test").setExecutor(new TestCMD());
-		//getCommand("ontime").setExecutor(new OntimeCMD());
-		//getCommand("home").setExecutor(new HomeCMD())
-		//getCommand("report").setExecutor(new ReportCMD());
+		getCommand("v").setExecutor(new vanishCMD(this));
 	}
 	
 	public void registerGUI(){
 		getCommand("admin").setExecutor(new AdminInventory());
 		getCommand("climate").setExecutor(new WeatherInv());
-		getCommand("egm").setExecutor(new GamemodeInv());
+		getCommand("egms").setExecutor(new GamemodeInv());
 		getCommand("diffis").setExecutor(new DiffiInv());
 		getCommand("serverinv").setExecutor(new ServerInventory());
 		getCommand("extra").setExecutor(new ExtraInv());
+		getCommand("onlinep").setExecutor(new OnlinePlayerInv());
 	}
 	
 	public void registerListener(){
@@ -147,8 +188,10 @@ public class AdminMain extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new DifficultyFunction(), this);
 		getServer().getPluginManager().registerEvents(new ServerFunction(), this);
 		getServer().getPluginManager().registerEvents(new ExtraFunction(), this);
+		getServer().getPluginManager().registerEvents(new OnlinePlayerFunction(), this);
 		
 		getServer().getPluginManager().registerEvents(new PlayerEvents(this), this);
+		getServer().getPluginManager().registerEvents(this, this);
 		
 	}
 	
@@ -157,7 +200,29 @@ public class AdminMain extends JavaPlugin{
 		saveConfig();
 	}
 
-
+	public void registerBlacklist(){
+		 File file = new File(this.getDataFolder(), "blacklist.txt");
+		 if (!file.exists()) {
+	            try {
+	                getDataFolder().mkdir();
+	                file.createNewFile();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        try {
+	            Scanner s;
+	            s = new Scanner(file);
+	            while (s.hasNextLine())
+	                blacklist.add(s.nextLine());
+	 
+	 
+	            System.out.println("Loaded Blacklist " + blacklist.size() + " words.");
+	            s.close();
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        }
+	}
 
 	public void onDisable()	{
 		System.out.println("[AdminInv] =================================");
@@ -190,10 +255,39 @@ public class AdminMain extends JavaPlugin{
 			if(p.hasPermission("AdminInv.Reload") || p.hasPermission("AdminInv.*")){
 				saveConfig();
 				reloadConfig();
-				p.sendMessage("§8[§4AdminInv§8]§r " + "§aConfig reloaded");
+				p.sendMessage(AdminPrefix + "§aConfig reloaded");
 			}
+		}else if(cmd.getName().equalsIgnoreCase("aspy")){
+			if(cs instanceof Player){
+				if(cs.hasPermission("AdmminInv.AdminSpy")){
+					if(!CommandSpy.contains(p.getName())){
+						CommandSpy.add(p.getName());
+						p.sendMessage(SpyPrefix + Spy);
+					}else{
+						CommandSpy.remove(p.getName());
+						p.sendMessage(SpyPrefix + NoSpy);
+					}
+				}else{
+					cs.sendMessage(SpyPrefix + NoPerm);
+				}
+			}else{
+				cs.sendMessage(SpyPrefix + NoPlayer);
+			}
+		}else{
+			cs.sendMessage(SpyPrefix + Correct_Use);
 		}
 		return true;
+	}
+
+	@EventHandler
+	public void onSpy(PlayerCommandPreprocessEvent e){
+		Player p = (Player)e.getPlayer();
+		String cmd = e.getMessage();
+		for(Player pl : Bukkit.getOnlinePlayers()){
+			if((!CommandSpy.contains(pl.getName()))  || (p == pl)) continue;
+			pl.sendMessage(SpyPrefix + "§7>> " + p.getName() + "§c:§6 " + cmd);
+		}
+		
 	}
 	
 	public static AdminMain get() {
