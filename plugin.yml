@@ -1,91 +1,94 @@
-name: AdminInv
-version: 2.1.1
-main: de.Fabian996.AdminInv.Main.AdminMain
+name: AdminInv2
+version: 1.0
+main: com.jimdo.Fabian996.AdminInv2.Main.AdminInv
 author: Fabian996
 website: http://bit.ly/1m13hON
 depend: [Vault]
 
 commands:
-  admin:
-    description: Shows all Admin functions
-    Default: OP
-
-  serverinv:
-    description: GUI form Admin Command
-    
-  climate:
-    description: GUI form Admin Command
-    
-  egm:
-    description: GUI form Admin Command
-    
-  diffis:
-    description: GUI form Admin Command
-  
-  extra:
-    description: GUI form Admin Command  
+  aspy:
+    description: Sie konnen sich anzeigen lassen was der Spieler fur ein Befehl nutzt
     
   areload:
-    description: Reload the Config
-
-  sinfo:
-    description: Show Server information
-  
-  ghast:
-    description: Give you Admin Item
-
+    description: Neuladen der Config
+    
   ahelp:
-    description: Show all commands form this Plugin
+    description: Zeigt alle Befehle an
     
-  phelp:
-    description: Show all commands of the Player
-        
-  warp:
-    description: This is the Warp command
-    aliases: [warps,delwarp,setwarp]
-    
-  afk:
-    description: This is the afk command
-  
-  ping:
-    description: You show your Ping(ms)
-  
   pinfo:
-    description: Show PlayerInfo form one Player
-
-  invsee:
-    description: You show in a Player Inventory
-    
-  kick:
-    description: You can kick a Player
+    description: Zeigt die Spieler Information an
     
   br:
-    description: You can send a Broadcast Message
-    
-  spawn:
-    description: You set the Spawn Point
-    aliases: [setspawn]
-    
-  vote:
-    description: Show Vote Links
+    description: Senden einer Broadcast
     
   cc:
-    description: Clear the Server Chat
+    description: Loscht den Chat
+    
+  glmute:
+    description: Globale Mute, Teammitglieder konnen schreiben
+    
+  heal:
+    description: Du kannst dich heilen oder andere Spieler
+    
+  ping:
+    description: Zeigt dir den Ping an MC Version 1.9.x
     
   tc:
-    description: Use now the Server Team Chat
+    description: Du kannst mit deinen Teammitglieder schreiben
     
-  msg:
-    description: You can send private message
-  
-  r:
-    description: You can send private message back 
+  wartung:
+    description: Hier mit kannst du den Wartungs Modus an/aus machen
     
-  tp:
-    description: You can teleport to player 
+  egm:
+    description: Du kannst in den verscheidene Gamemode wecheln
     
+  sinfo:
+    description: Zeigt dier Serverinformation an
+    
+  vote:
+    description: Zeigt dier Serverinformation an 
+    
+  invsee:
+    description: Zeigt dir das Inventar und Ender Chest
+    
+  kick:
+    description: Spieler kicken mit Grund vom server
+    
+  aban:
+    description: Spieler von Server Bannen
+
+  uban:
+    description: Spieler von Server Unbannen
+
+  setinfo:
+    description: Andern der Serverinformation
+
   rename:
-    description: You can the Item name change
+    description: Andert den namen des Items in der Hand
+
+  msg:
+    description: Private Nachrichten senden
+
+  r:
+    description: Private Nachrichten senden
     
-  gm:
-    description: Change your gamemode  
+
+permissions:
+  admininv.*:
+    description: Gibt Zugang zu allen Befehlen von AdminInv 
+    default: OP
+    children:
+      admininv.admin: true
+      admininv.spielerinfo: true
+      admininv.broadcast: true
+      admininv.cc: true
+      admininv.globalmute: true
+      admininv.heal: true
+      admininv.healother: true
+      admininv.tc: true
+      admininv.wartung: true
+      admininv.invsee: true
+      admininv.kick: true
+      admininv.ban: true
+      admininv.setinfo: true
+      admininv.rename: true
