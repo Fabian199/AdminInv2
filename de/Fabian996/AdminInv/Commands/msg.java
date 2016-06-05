@@ -1,6 +1,4 @@
-package de.Fabian996.AdminInv.Commands;
-
-import java.util.HashMap;
+package com.jimdo.Fabian996.AdminInv2.Commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,12 +7,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class msgCMD implements CommandExecutor {
-	
-	public static final String Prefix = "§8[§4AdminInv§8]§r ";
-	public static final HashMap<String, String> LAST_MSG_SEND_TO = new HashMap<>();
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
-	
+public class msg implements CommandExecutor {
+
 	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
@@ -31,23 +27,24 @@ public class msgCMD implements CommandExecutor {
 						Message = ChatColor.translateAlternateColorCodes('&', Message);
 						SendMsg(cs, target, Message);
 					}else{
-						cs.sendMessage(Prefix + "§cYou cannot correspond yourself.");
+						cs.sendMessage(AdminInv.AdminPrefix + "§cDu kannst nicht mit dir selber schreiben");
 					}
 				}else{
-					cs.sendMessage(Prefix + "§cError: §6" + args[0] + " §cif is not online! ");
+					cs.sendMessage(AdminInv.AdminPrefix + "§cFehler: §6" + args[0] + " §cist nict onlein! ");
 				}
 			}else{
-				cs.sendMessage(Prefix + "Use: §6/" + label + " §7<message>");
+				cs.sendMessage(AdminInv.AdminPrefix + "Nutze: §3/" + label + " §7<§5Nachricht§7>");
 			}
 		}
-		return false;
+		return true;
 	}
+	
 	public static void SendMsg(CommandSender cs, CommandSender target, String Message){
 		try{
-		cs.sendMessage(Prefix + "§2" + cs.getName() + " §7» §6" + target.getName() + " §8| §7" + Message);
-		target.sendMessage(Prefix + "§6" + cs.getName() + " §7» §2" + target.getName() + " §8| §7" + Message);
-		LAST_MSG_SEND_TO.put(cs.getName(), target.getName());
-		LAST_MSG_SEND_TO.put(target.getName(), cs.getName());
+		cs.sendMessage(AdminInv.AdminPrefix + "§2" + cs.getName() + " §7» §6" + target.getName() + " §8| §7" + Message);
+		target.sendMessage(AdminInv.AdminPrefix + "§6" + cs.getName() + " §7» §2" + target.getName() + " §8| §7" + Message);
+		AdminInv.Last_msg_Send_To.put(cs.getName(), target.getName());
+		AdminInv.Last_msg_Send_To.put(target.getName(), cs.getName());
 		}catch(Exception e){
 		}
 	}
