@@ -19,7 +19,7 @@
 - Added ClearChat Befehl
 - Added Globale Mute Befehl
 - Added Heal Befehl
-- Added Ping Befehl
+- Added Ping Befehl [MC-Version 1.9]
 - Added TeamChat Befehl
 - Added Wartungs Prefix
 - Added Wartungs Befehl
@@ -36,7 +36,7 @@
 - Added rename Befehl
 
 04.06.2016
-- Added Unban Befehl
+- Added Unban Befehl [Buggy]
 - Added Erstellung alle Config´s
 - Added MySQl Servic
 
