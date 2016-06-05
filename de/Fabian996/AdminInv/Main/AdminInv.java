@@ -109,14 +109,14 @@ public class AdminInv extends JavaPlugin implements Listener,CommandExecutor{
 	
 	public void onEnable() {
 		
-		instance = this;
-		Metrics();
+	    instance = this;
+	    Metrics();
 		
-		registerCommands();
-		registerListener();
-		registerBlacklist();
+	    registerCommands();
+	    registerListener();
+	    registerBlacklist();
 		
-		saveConfig();
+	    saveConfig();
 	    registerConfig();
 
 	    StartMySQL();
