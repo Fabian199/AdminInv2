@@ -1,4 +1,4 @@
-package de.Fabian996.AdminInv.Commands;
+package com.jimdo.Fabian996.AdminInv2.Commands;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,15 +13,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-public class WarpCMD implements CommandExecutor {
-	
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
+
+public class Warp implements CommandExecutor{
+
 	private File file = new File("plugins/AdminInv", "warps.yml");
 	private FileConfiguration cfg = YamlConfiguration.loadConfiguration(this.file);
 	
-	private String err_need_player = "You must be a player!";
-	private String err_need_argument = "To many arrgument";
-	
-	public static final String Prefix = "§8[§4AdminInv§8]§r ";
+	private String err_need_argument = "Zu viele Argumente";
 	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
@@ -35,8 +34,12 @@ public class WarpCMD implements CommandExecutor {
 					String str = "warps." + args[0].toLowerCase() + ".";
 					World w = Bukkit.getWorld(this.cfg.getString(str + "world"));
 					if(w == null){
-						p.sendMessage(Prefix + "§4The warp is in an unknown world");
+						p.sendMessage(AdminInv.AdminPrefix + "§4Der Warp ist in einer unbekannten Welt");
 						return true;
+					}
+					
+					if(args[0] == null){
+						p.sendMessage(AdminInv.AdminPrefix + "Nutze: §3warps");
 					}
 					double x = this.cfg.getDouble(str + "x");
 					double y = this.cfg.getDouble(str + "y");
@@ -45,12 +48,12 @@ public class WarpCMD implements CommandExecutor {
 					double pitch = this.cfg.getDouble(str + "pitch");
 					Location loc = new Location(w, x, y, z, (float)yaw, (float)pitch);
 					p.teleport(loc);
-					cs.sendMessage(Prefix + "§2You were to Warp§6" + args[0].toLowerCase() + "§2 teleport");
+					cs.sendMessage(AdminInv.AdminPrefix + "§2Du würdst zu Warp §6" + args[0] + " §2Teleportiert");
 				}else{
-					cs.sendMessage(Prefix + this.err_need_argument);
+					cs.sendMessage(AdminInv.AdminPrefix + this.err_need_argument);
 				}
 			}else{
-				cs.sendMessage(Prefix + this.err_need_player);
+				cs.sendMessage(AdminInv.AdminPrefix + AdminInv.NoPlayer);
 			}
 		}else if(label.equalsIgnoreCase("setwarp")){
 			if(p != null){
@@ -66,16 +69,16 @@ public class WarpCMD implements CommandExecutor {
 						this.cfg.set(str + "pitch", loc.getPitch());
 						try {
 							this.cfg.save(this.file);
-							cs.sendMessage(Prefix + "§2Warp §6" + args[0].toLowerCase() + "§2 successfully set");
+							cs.sendMessage(AdminInv.AdminPrefix + "§2Warp §6" + args[0].toLowerCase() + " §2würde erfolgreich gesetzt");
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					}else{
-						p.sendMessage(Prefix + this.err_need_argument);
+						p.sendMessage(AdminInv.AdminPrefix + this.err_need_argument);
 					}
 				}
 			}else{
-				cs.sendMessage(Prefix + this.err_need_player);
+				cs.sendMessage(AdminInv.AdminPrefix + AdminInv.NoPlayer);
 				}
 		}else if (label.equalsIgnoreCase("delwarp")){
 			if(args.length == 1){
@@ -83,7 +86,7 @@ public class WarpCMD implements CommandExecutor {
 					this.cfg.set("warps." + args[0].toLowerCase(), null);
 					try {
 						this.cfg.save(file);
-						cs.sendMessage(Prefix + "§2Warp §6" + args[0].toLowerCase() + "§2 successfully deleted");
+						cs.sendMessage(AdminInv.AdminPrefix + "§2Warp §6" + args[0].toLowerCase() + " §2würde erfolgreich gelöscht");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -94,9 +97,8 @@ public class WarpCMD implements CommandExecutor {
 			for(String warp : this.cfg.getConfigurationSection("warps").getKeys(false)){
 				str += warp + ", ";
 			}
-			cs.sendMessage(Prefix + str);
+			cs.sendMessage(AdminInv.AdminPrefix + str);
 		}
 		return true;
 	}
-
 }
