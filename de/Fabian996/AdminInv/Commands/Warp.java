@@ -17,11 +17,12 @@ import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
 public class Warp implements CommandExecutor{
 
-	private File file = new File("plugins/AdminInv", "warps.yml");
+	private File file = new File("plugins/AdminInv2", "warps.yml");
 	private FileConfiguration cfg = YamlConfiguration.loadConfiguration(this.file);
 	
-	private String err_need_argument = "Zu viele Argumente";
+	private String err_need_argument = "Zu wenig Argumente";
 	
+	@SuppressWarnings("unused")
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = null;
@@ -39,7 +40,7 @@ public class Warp implements CommandExecutor{
 					}
 					
 					if(args[0] == null){
-						p.sendMessage(AdminInv.AdminPrefix + "Nutze: §3warps");
+						p.sendMessage(AdminInv.AdminPrefix + "Nutze: §3/warps");
 					}
 					double x = this.cfg.getDouble(str + "x");
 					double y = this.cfg.getDouble(str + "y");
@@ -48,16 +49,16 @@ public class Warp implements CommandExecutor{
 					double pitch = this.cfg.getDouble(str + "pitch");
 					Location loc = new Location(w, x, y, z, (float)yaw, (float)pitch);
 					p.teleport(loc);
-					cs.sendMessage(AdminInv.AdminPrefix + "§2Du würdst zu Warp §6" + args[0] + " §2Teleportiert");
+					cs.sendMessage(AdminInv.AdminPrefix + "§7Du würdst zu Warp §6" + args[0] + " §7Teleportiert");
 				}else{
-					cs.sendMessage(AdminInv.AdminPrefix + this.err_need_argument);
+					cs.sendMessage(AdminInv.AdminPrefix + "Nutze: §3/warps");
 				}
 			}else{
 				cs.sendMessage(AdminInv.AdminPrefix + AdminInv.NoPlayer);
 			}
 		}else if(label.equalsIgnoreCase("setwarp")){
 			if(p != null){
-				if(p.hasPermission("AdminInv.Warp") || p.hasPermission("AdminInv.*")){
+				if(p.hasPermission("admininv.warp") || p.hasPermission("admininv.*")){
 					if(args.length == 1){
 						Location loc = p.getLocation();
 						String str = "warps." + args[0].toLowerCase() + ".";
@@ -69,7 +70,7 @@ public class Warp implements CommandExecutor{
 						this.cfg.set(str + "pitch", loc.getPitch());
 						try {
 							this.cfg.save(this.file);
-							cs.sendMessage(AdminInv.AdminPrefix + "§2Warp §6" + args[0].toLowerCase() + " §2würde erfolgreich gesetzt");
+							cs.sendMessage(AdminInv.AdminPrefix + "§7Warp §6" + args[0].toLowerCase() + " §7würde erfolgreich gesetzt");
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -82,20 +83,23 @@ public class Warp implements CommandExecutor{
 				}
 		}else if (label.equalsIgnoreCase("delwarp")){
 			if(args.length == 1){
-				if(p.hasPermission("AdminInv.Warp") || p.hasPermission("AdminInv.*")){
+				if(p.hasPermission("admininv.warp") || p.hasPermission("admininv.*")){
 					this.cfg.set("warps." + args[0].toLowerCase(), null);
 					try {
 						this.cfg.save(file);
-						cs.sendMessage(AdminInv.AdminPrefix + "§2Warp §6" + args[0].toLowerCase() + " §2würde erfolgreich gelöscht");
+						cs.sendMessage(AdminInv.AdminPrefix + "§7Warp §6" + args[0].toLowerCase() + " §7würde erfolgreich gelöscht");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 			}
 		}if(label.equalsIgnoreCase("warps")){
-			String str = "Warp: §3";
+			String str = "§2Warps§f: §b";
+			if(str == null){
+				p.sendMessage(AdminInv.AdminPrefix + "§7Bitte erstell ein Warp ");
+			}
 			for(String warp : this.cfg.getConfigurationSection("warps").getKeys(false)){
-				str += warp + ", ";
+				str += warp + "§f,§b ";
 			}
 			cs.sendMessage(AdminInv.AdminPrefix + str);
 		}
