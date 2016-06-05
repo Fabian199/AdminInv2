@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>de.Fabian996</groupId>
-    <artifactId>AdminInv</artifactId>
-    <version>2.0</version>
-
-    <repositories>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.jimdo.Fabian996</groupId>
+	<artifactId>AdminInv2</artifactId>
+	<version>1.0</version>
+	
+	 <repositories>
         <repository>
-            <id>AdminInv Metrics</id>
+            <id>AdminInv2 Metrics</id>
             <url>http://repo.mcstats.org/content/repositories/public</url>
         </repository>
     </repositories>
@@ -52,7 +53,7 @@
                     <relocations>
                         <relocation>
                             <pattern>org.mcstats</pattern>
-                            <shadedPattern>me.Fabian996.AdminInv</shadedPattern>
+                            <shadedPattern>me.Fabian996.AdminInv2</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
