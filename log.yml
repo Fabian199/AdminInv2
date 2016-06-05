@@ -1,0 +1,44 @@
+14.04.2016
+- Angefangen neu zuschreiben
+- Remove afk Command 
+- Added TeamChat Prefix
+- Added Admin Prefix
+- Added CommandSpy Prefix
+- Added CommandSpy Befehl
+- Added Config reload Befehl
+
+06.05.2016
+- Added SpielerInfo Befehl
+- Added Spieler/Admin Help Befehl
+
+28.05.2016
+- Added Spieler/Admin Help Erweitert
+- Added Broadcast Befehl
+- Added Änderung des Reload aussehen
+- Added System Prefix
+- Added ClearChat Befehl
+- Added Globale Mute Befehl
+- Added Heal Befehl
+- Added Ping Befehl
+- Added TeamChat Befehl
+- Added Wartungs Prefix
+- Added Wartungs Befehl
+- Added Gamemode Befehl
+
+29.05.2016
+- Added Ban Befehl
+- Added JoinEvent für Gebannte Spieler
+- Added Ban Prefix
+- Added Serverinformation ändern Befehl
+- Added Invsee [Enderchest/Inventar]
+- Added Kick Befehl
+- Added msg/r Befehl
+- Added rename Befehl
+
+04.06.2016
+- Added Unban Befehl
+- Added Erstellung alle Config´s
+- Added MySQl Servic
+
+05.06.2016
+- Added Chat and Command Log´s
