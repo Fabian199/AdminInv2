@@ -1,4 +1,4 @@
-package de.Fabian996.AdminInv.Commands;
+package com.jimdo.Fabian996.AdminInv2.Commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,21 +9,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ReNameCMD implements CommandExecutor {
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
-	public static final String Prefix = "§8[§4AdminInv§8]§r ";
+public class renameItem implements CommandExecutor{
+
+	private String cmdHelp = "Nutze: §3/rename §7<§5ItemName§7>";
+	private String Not_Item_In_The_Hand = "§cDu musst ein Item in der Hand halten.";
 	
-	private String Not_Player = "You must be a player!";
-	private String Wrong_Use = "To Use: §3/rename §7<ItemName>";
-	private String Not_Item_In_The_Hand = "§cYou must hold an item in your hand.";
-	private String Need_Permission = "§4You do have not permission to do that";
-	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("rename")){
 			if((cs instanceof Player)){
 				Player p = (Player)cs;
-				if(p.hasPermission("AdminInv.RenameItem") || p.hasPermission("AdminInv.*")){
+				if(p.hasPermission("admininv.rename") || p.hasPermission("admininv.*")){
 					if((p.getItemInHand() != null) && (!p.getItemInHand().getType().equals(Material.AIR))){
 						if(args.length == 1){
 							ItemStack Item = p.getItemInHand();
@@ -36,18 +35,18 @@ public class ReNameCMD implements CommandExecutor {
 							Itemmeta.setDisplayName(ColorString);
 							Item.setItemMeta(Itemmeta);
 						
-							p.sendMessage(Prefix + "Succesfully renamed the item in hand to: §r" + ColorString);
+							p.sendMessage(AdminInv.AdminPrefix + "Erfolgreich das Item in der Hand umbenannt\n" + AdminInv.AdminPrefix + "§7Das Item heißt jetzt §r" + ColorString);
 						}else{
-							cs.sendMessage(Prefix + Wrong_Use);
+							cs.sendMessage(AdminInv.AdminPrefix  + cmdHelp);
 						}
 					}else{
-						cs.sendMessage(Prefix + Not_Item_In_The_Hand);
+						cs.sendMessage(AdminInv.AdminPrefix  + Not_Item_In_The_Hand);
 					}
 				}else{
-					cs.sendMessage(Prefix + Need_Permission);
+					cs.sendMessage(AdminInv.AdminPrefix  + AdminInv.NoPerm);
 				}
 			}else{
-				cs.sendMessage(Prefix + Not_Player);
+				cs.sendMessage(AdminInv.AdminPrefix + AdminInv.NoPlayer);
 			}
 		}
 		return true;
