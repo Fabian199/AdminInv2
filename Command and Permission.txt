@@ -1,0 +1,39 @@
+AdminInv2 Befehle and Permission
+
+Spieler Befehle:               Permission:
+/warps
+/warp <Warpname>
+/ahelp <1-2>                
+/ping [MC V1.9]
+/sinfo
+/msg <Spieler> <Nachricht> 
+/r <Nachricht>
+
+
+Admin Befehle:                Permission:
+/ahelp <3-4>                  admininv.admin
+/admin                        admininv.admin
+/ghast                        admininv.admin
+/pinfo <Spieler>              admininv.spielerinfo
+/br <Nachricht>               admininv.broadcast
+/cc                           admininv.cc
+/glmute                       admininv.globalmute
+/heal <Spieler>               admininv.heal | admininv.healother
+/tc <Nachricht>               admininv.tc
+/wartung <on/off>             admininv.wartung
+/invsee <ender/inv>           admininv.invsee
+/atp <Spieler> - <Spieler2>   admininv.teleport
+/setwarp <Warpname>           admininv.warp
+/delwarp <Warpname>           admininv.warp
+/kick <Spieler> <Grund>       admininv.kick
+/rename <Itemname>            admininv.rename
+/aspy                         admininv.admin 
+/areload                      admininv.admin
+/backup                       admininv.backup
+/setinfo <forum/ts/website>   admininv.setinfo
+/egm <0/1/2/3> <Spieler>      admininv.egm
+
+Besondere Permission:
+Ignore Kick bei Wartung       admininv.ignore
+Ignore Global Mute Aktive     admininv.mute
+Alle Permission mit           admininv.*
