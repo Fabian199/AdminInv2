@@ -1,29 +1,26 @@
-package de.Fabian996.AdminInv.Function;
-
-import java.io.File;
+package com.jimdo.Fabian996.AdminInv2.Funktion;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
-public class AdminFunction implements Listener {
+public class AdminGUIFunktion implements Listener{
+
+	AdminInv p;
 	
-	public static final String Prefix = "§8[§4AdminInv§8]§r ";
-	
-	//Config
-	private File file = new File("plugins/AdminInv", "config.yml");
-	private FileConfiguration cfg = YamlConfiguration.loadConfiguration(this.file);
+	public AdminGUIFunktion(AdminInv adminInv) {
+		this.p = adminInv;
+	}
 
 	@EventHandler
 	public void Inventory(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
-		if(e.getInventory().getName().equalsIgnoreCase("§0Admin Inventory")){
+		if(e.getInventory().getName().equalsIgnoreCase("§4Admin GUI")){
 			e.setCancelled(true);
 
 			// Heal Function
@@ -31,7 +28,7 @@ public class AdminFunction implements Listener {
 				p.setHealth(20);
 				p.setFoodLevel(20);
 				p.getActivePotionEffects().clear();
-				p.sendMessage(Prefix + "&eYou were cured");
+				p.sendMessage(AdminInv.AdminPrefix + "§7Du würdst geheilt");
 				e.getView().close();
 			}
 			
@@ -40,11 +37,11 @@ public class AdminFunction implements Listener {
 	            if (p.getAllowFlight()) {
 		              p.setFlying(false);
 		              p.setAllowFlight(false);
-		              p.sendMessage(Prefix + "&2Fly Disabled");
+		              p.sendMessage(AdminInv.AdminPrefix + "§cFly Disabled");
 		            } else {
 		              p.setAllowFlight(true);
 		              p.setFlySpeed(0.1F);
-		              p.sendMessage(Prefix + "&4Fly Enabled");		              
+		              p.sendMessage(AdminInv.AdminPrefix + "§aFly Enabled");		              
 		            }
 				e.getView().close();
 			}
@@ -54,9 +51,9 @@ public class AdminFunction implements Listener {
 				p.performCommand("climate");
 			}
 			
-			if(e.getCurrentItem().getType() == Material.PACKED_ICE){
+			if(e.getCurrentItem().getType() == Material.DIAMOND_SWORD){
 				e.getView().close();
-				p.performCommand("egms");
+				p.performCommand("gamem");
 			}
 			
 			if(e.getCurrentItem().getType() == Material.CACTUS){
@@ -64,24 +61,29 @@ public class AdminFunction implements Listener {
 				p.performCommand("diffis");
 			}
 			
+			if(e.getCurrentItem().getType() == Material.SLIME_BALL){
+				e.getView().close();
+				p.performCommand("v");
+			}
+			
 			if(e.getCurrentItem().getType() == Material.SNOW_BLOCK){
-					if(cfg.getBoolean("Inventory.ExtraInv", true)){
+					if(AdminInv.cfg.getBoolean("Inventory.ExtraInv", true)){
 						e.getView().close();
 						p.performCommand("extra");
-					}else if(cfg.getBoolean("Inventory.ExtraInv", false)){
+					}else if(AdminInv.cfg.getBoolean("Inventory.ExtraInv", false)){
 						e.getView().close();
-						p.sendMessage(Prefix + "You can Enable in the Config");
+						p.sendMessage(AdminInv.AdminPrefix + "§7Du kannst es in der Config Aktivieren");
 					}		
 			}
 
 			if(e.getCurrentItem().getType() == Material.SPONGE){
 				e.getView().close();
-				p.performCommand("rl");
+				p.performCommand("reload");
     			for( Player target : Bukkit.getOnlinePlayers()){
-    				for(int i = 0; i < 80; i++){
+    				for(int i = 0; i < 100; i++){
     					target.sendMessage(" ");
     				}
-    				target.sendMessage(Prefix + "§7Chat has been cleared");
+    				target.sendMessage(AdminInv.AdminPrefix + "§7Der Chat würde gelöscht");
     			}
 			}
 			
@@ -97,7 +99,7 @@ public class AdminFunction implements Listener {
 			
 			if(e.getCurrentItem().getType() == Material.SKULL_ITEM){
 				e.getView().close();
-				p.performCommand("onlinep");
+			//	p.performCommand("onlinep");
 			}
 		}
 	}
