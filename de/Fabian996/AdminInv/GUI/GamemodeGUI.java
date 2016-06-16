@@ -1,60 +1,60 @@
-package de.Fabian996.AdminInv.GUI;
+package com.jimdo.Fabian996.AdminInv2.GUI;
 
 import java.util.ArrayList;
 
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class GamemodeInv implements CommandExecutor {
-	
-	public Inventory Gamemode = null;
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
+
+public class GamemodeGUI implements CommandExecutor {
+
+	public GamemodeGUI(AdminInv adminInv) {
+	}
 	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = (Player)cs;
-		if(cmd.getName().equalsIgnoreCase("egms")){
-			if(p.hasPermission("AdminInv.Admin") || p.hasPermission("AdminInv.*")){
-				p.playSound(p.getLocation(), Sound.ARROW_HIT, 1000.0F, 6.0F);
-				Gamemode = p.getPlayer().getServer().createInventory(null, 18, "§0Gamemode Inventory");
+		if(cmd.getName().equalsIgnoreCase("gamem")){
+			if(p.hasPermission("admininv.admin") || p.hasPermission("adminInv.*")){
+				AdminInv.GameMode = p.getPlayer().getServer().createInventory(null, 18, "§6Gamemode Inventar");
 				// Inventar Erstellt...
 				
 				// Icons im Inventar festlegen..
 				ItemStack SM = new ItemStack(Material.BED);
 				ItemMeta SMmeta = SM.getItemMeta();
 				ArrayList<String> SuM = new ArrayList<String>();
-				SMmeta.setDisplayName("§6Survival Mode");
-				SuM.add("§2You can put yourself in Survival mode");
+				SMmeta.setDisplayName("§6Survival Modus");
+				SuM.add("§2Du kannst dich in den Survival Modus setzen");
 				SMmeta.setLore(SuM);
 				SM.setItemMeta(SMmeta);
 				
 				ItemStack CM = new ItemStack(Material.BEDROCK);
 				ItemMeta CMmeta = CM.getItemMeta();
 				ArrayList<String> CrM = new ArrayList<String>();
-				CMmeta.setDisplayName("§4Creative Mode");
-				CrM.add("§6You can put yourself in Creative mode");
+				CMmeta.setDisplayName("§4Creative Modus");
+				CrM.add("§6Du kannst dich in den Creative Modus setzen");
 				CMmeta.setLore(CrM);
 				CM.setItemMeta(CMmeta);
 
 				ItemStack AM = new ItemStack(Material.STONE_SWORD);
 				ItemMeta AMmeta = AM.getItemMeta();
 				ArrayList<String> AdM = new ArrayList<String>();
-				AMmeta.setDisplayName("§3Adventure Mode");
-				AdM.add("§eYou can put yourself in Adventure mode");
+				AMmeta.setDisplayName("§3Adventure Modus");
+				AdM.add("§eDu kannst dich in den Adventure Modus setzen");
 				AMmeta.setLore(AdM);
 				AM.setItemMeta(AMmeta);
 				
 				ItemStack SpM = new ItemStack(Material.BONE);
 				ItemMeta SpMmeta = SpM.getItemMeta();
 				ArrayList<String> SPM = new ArrayList<String>();
-				SpMmeta.setDisplayName("§5Spectator Mode");
-				SPM.add("§eYou can put yourself in Spectator mode");
+				SpMmeta.setDisplayName("§5Spectator Modus");
+				SPM.add("§eDu kannst dich in den Spectator Modus setzen");
 				SpMmeta.setLore(SPM);
 				SpM.setItemMeta(SpMmeta);
 				
@@ -62,18 +62,18 @@ public class GamemodeInv implements CommandExecutor {
 				ItemMeta Backmeta = Back.getItemMeta();
 				ArrayList<String> BM = new ArrayList<String>();
 				Backmeta.setDisplayName("§aBack");
-				BM.add("Back to Inventory");
+				BM.add("Zurück zum Inventar");
 				Backmeta.setLore(BM);
 				Back.setItemMeta(Backmeta);
 
-				Gamemode.setItem(2, SM);
-				Gamemode.setItem(3, CM);
-				Gamemode.setItem(4, AM);
-				Gamemode.setItem(5, SpM);
+				AdminInv.GameMode.setItem(2, SM);
+				AdminInv.GameMode.setItem(3, CM);
+				AdminInv.GameMode.setItem(4, AM);
+				AdminInv.GameMode.setItem(5, SpM);
 				
-				Gamemode.setItem(9, Back);
+				AdminInv.GameMode.setItem(9, Back);
 				
-				p.getPlayer().openInventory(Gamemode);
+				p.getPlayer().openInventory(AdminInv.GameMode);
 				}
 		}
 		return true;
