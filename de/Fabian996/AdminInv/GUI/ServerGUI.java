@@ -1,33 +1,28 @@
-package de.Fabian996.AdminInv.GUI;
+package com.jimdo.Fabian996.AdminInv2.GUI;
 
 import java.util.ArrayList;
 
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.Fabian996.AdminInv.Main.AdminMain;
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
-public class ServerInventory implements CommandExecutor {
+public class ServerGUI implements CommandExecutor {
+	
+	public ServerGUI(AdminInv adminInv) {
+	}
 
-	@SuppressWarnings("unused")
-	private static AdminMain instance;
-	
-	Inventory Server = null;
-	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = (Player)cs;
-		if(cmd.getName().equalsIgnoreCase("server")){
-			if(p.hasPermission("AdminInv.Admin")){
-				p.playSound(p.getLocation(), Sound.FIREWORK_BLAST, 100.0F, 16.0F);
-				Server = p.getPlayer().getServer().createInventory(null, 18, "§0Server Inventory");
+		if(cmd.getName().equalsIgnoreCase("serverinv")){
+			if(p.hasPermission("admininv.admin") || p.hasPermission("admininv.*")){
+				AdminInv.Servers = p.getPlayer().getServer().createInventory(null, 18, "§0Server Inventar");
 				// Inventar Erstellt...
 				
 				ItemStack Ja = new ItemStack(Material.BARRIER);
@@ -44,16 +39,16 @@ public class ServerInventory implements CommandExecutor {
 				ItemMeta Backmeta = Back.getItemMeta();
 				ArrayList<String> BM = new ArrayList<String>();
 				Backmeta.setDisplayName("§aBack");
-				BM.add("Back to Inventory");
+				BM.add("Zurück zum Inventar");
 				Backmeta.setLore(BM);
 				Back.setItemMeta(Backmeta);
 
-				Server.setItem(2, Ja);
-				Server.setItem(6, Nein);
+				AdminInv.Servers.setItem(2, Ja);
+				AdminInv.Servers.setItem(6, Nein);
 				
-				Server.setItem(9, Back);
+				AdminInv.Servers.setItem(9, Back);
 				
-				p.getPlayer().openInventory(Server);
+				p.getPlayer().openInventory(AdminInv.Servers);
 			}	
 		}
 		return true;
