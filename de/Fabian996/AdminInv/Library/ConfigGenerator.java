@@ -3,20 +3,15 @@ package com.jimdo.Fabian996.AdminInv2.Library;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
 public class ConfigGenerator {
 
-	AdminInv pl;
-	
-	public ConfigGenerator(AdminInv main){
-		this.pl = main;
-	}
 	
 	public static void CreateConfigs(){
-	    File mysqlfile = new File("plugins/AdminInv2", "MySQL.yml");
+	    File mysqlfile = new File("plugins/AdminInv2/Einstellung", "MySQL.yml");
 	    YamlConfiguration mysqlcfg = YamlConfiguration.loadConfiguration(mysqlfile);
 	    
 	    mysqlcfg.addDefault("AdminInv.MySQL.Enabled", Boolean.valueOf(false));
@@ -34,7 +29,19 @@ public class ConfigGenerator {
 		bancfg.addDefault("Ban", null);
 		bancfg.options().copyDefaults(true);
 		saveConfig(bancfg, banfile);
-	    
+		
+		File scoreboardfile = new File("plugins/AdminInv2/Einstellung", "Scoreboard.yml");
+		YamlConfiguration scoreboardcfg = YamlConfiguration.loadConfiguration(scoreboardfile);
+		
+		scoreboardcfg.addDefault("Scoreboard.Title", "&8-= &6&lYOUR SERVER  &8=-");
+		scoreboardcfg.addDefault("Scoreboard.Line1", "&2&lModus:");
+		scoreboardcfg.addDefault("Scoreboard.Line2", "&8- &7Example: SurvivalGames");
+		scoreboardcfg.addDefault("Scoreboard.Placeholder1", "&7");
+		scoreboardcfg.addDefault("Scoreboard.Line3", "&2&lTeamspeak");
+		scoreboardcfg.addDefault("Scoreboard.Line4", "&8- &7Teamspeak I");
+		scoreboardcfg.addDefault("Scoreboard.Line5", "&7&m------------------------");
+		scoreboardcfg.options().copyDefaults(true);
+		saveConfig(scoreboardcfg, scoreboardfile);
 	}
 	
 	 public static void saveConfig(YamlConfiguration config, File file){
@@ -44,4 +51,23 @@ public class ConfigGenerator {
 			 ex.printStackTrace();
 	  	 }
 	 }
+
+	public static void loadConfig() {
+	    File mysqlfile = new File("plugins/AdminInv2/Einstellung", "MySQL.yml");
+	    FileConfiguration mysqlcfg = YamlConfiguration.loadConfiguration(mysqlfile);
+		
+		File banfile = new File("plugins/AdminInv2", "banlist.yml");
+		FileConfiguration bancfg = YamlConfiguration.loadConfiguration(banfile);
+		
+		File scoreboardfile = new File("plugins/AdminInv2/Einstellung", "Scoreboard.yml");
+		FileConfiguration scoreboardcfg = YamlConfiguration.loadConfiguration(scoreboardfile);
+		
+		try {
+			mysqlcfg.load(mysqlfile);
+			bancfg.load(banfile);
+			scoreboardcfg.load(scoreboardfile);
+		} catch (IOException | InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
 }
