@@ -4,7 +4,7 @@ Spieler Befehle:               Permission:
 /warps
 /warp <Warpname>
 /ahelp <1-2>                
-/ping [MC V1.9]
+/ping 
 /sinfo
 /msg <Spieler> <Nachricht> 
 /r <Nachricht>
@@ -32,6 +32,8 @@ Admin Befehle:                Permission:
 /backup                       admininv.backup
 /setinfo <forum/ts/website>   admininv.setinfo
 /egm <0/1/2/3> <Spieler>      admininv.egm
+/backup                       admininv.backup
+/v                            admininv.vanish
 
 Besondere Permission:
 Ignore Kick bei Wartung       admininv.ignore
