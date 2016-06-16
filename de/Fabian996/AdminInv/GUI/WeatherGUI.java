@@ -1,34 +1,34 @@
-package de.Fabian996.AdminInv.GUI;
+package com.jimdo.Fabian996.AdminInv2.GUI;
 
 import java.util.ArrayList;
 
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class WeatherInv implements CommandExecutor {
-		
-	public Inventory Wetter = null;
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
+
+public class WeatherGUI implements CommandExecutor {
+	
+	public WeatherGUI(AdminInv adminInv) {
+	}
 	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = (Player)cs;
 		if(cmd.getName().equalsIgnoreCase("climate")){
-			if(p.hasPermission("AdminInv.Admin") || p.hasPermission("AdminInv.*")){
-				p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 10.0F, 6.0F);
-				Wetter = p.getPlayer().getServer().createInventory(null, 18, "§0Weather/Time Inventory");
+			if(p.hasPermission("admininv.admin") || p.hasPermission("admininv.*")){
+				AdminInv.Wetter = p.getPlayer().getServer().createInventory(null, 18, "§2Wetter/Zeit Inventar");
 
 				ItemStack Storm = new ItemStack(Material.WATER_LILY);
 				ItemMeta Stormmeta = Storm.getItemMeta();
 				ArrayList<String> StormM = new ArrayList<String>();
 				Stormmeta.setDisplayName("§bStorm");
-				StormM.add("§fIt catches in to rain in the world ");
+				StormM.add("§fEs fängt an zu Storm");
 				Stormmeta.setLore(StormM);
 				Storm.setItemMeta(Stormmeta);
 				
@@ -36,7 +36,7 @@ public class WeatherInv implements CommandExecutor {
 				ItemMeta Clearmeta = Clear.getItemMeta();
 				ArrayList<String> ClearM = new ArrayList<String>();
 				Clearmeta.setDisplayName("§7Clear");
-				ClearM.add("§fThe weather we again normally ");
+				ClearM.add("§7Das Wetter verschwindet");
 				Clearmeta.setLore(ClearM);
 				Clear.setItemMeta(Clearmeta);
 				
@@ -44,7 +44,7 @@ public class WeatherInv implements CommandExecutor {
 				ItemMeta Thunderingmeta = Thundering.getItemMeta();
 				ArrayList<String> ThunderingM = new ArrayList<String>();
 				Thunderingmeta.setDisplayName("§5Thundering");
-				ThunderingM.add("§fIt starts to thunderstorms in the world ");
+				ThunderingM.add("§fEs fängt an zu Gewittern");
 				Thunderingmeta.setLore(ThunderingM);
 				Thundering.setItemMeta(Thunderingmeta);
 				
@@ -67,17 +67,17 @@ public class WeatherInv implements CommandExecutor {
 				Backmeta.setLore(BM);
 				Back.setItemMeta(Backmeta);
 
-				Wetter.setItem(3, Storm);
-				Wetter.setItem(4, Clear);
-				Wetter.setItem(5, Thundering);
+				AdminInv.Wetter.setItem(3, Storm);
+				AdminInv.Wetter.setItem(4, Clear);
+				AdminInv.Wetter.setItem(5, Thundering);
 				
-				Wetter.setItem(7, Day);
-				Wetter.setItem(8, Night);
+				AdminInv.Wetter.setItem(7, Day);
+				AdminInv.Wetter.setItem(8, Night);
 				
-				Wetter.setItem(9, Back);
+				AdminInv.Wetter.setItem(9, Back);
 				
-				p.getPlayer().openInventory(Wetter);
-				}
+				p.getPlayer().openInventory(AdminInv.Wetter);
+			}
 		}
 		return true;
 	}
