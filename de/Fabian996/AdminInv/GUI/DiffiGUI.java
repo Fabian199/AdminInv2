@@ -1,28 +1,29 @@
-package de.Fabian996.AdminInv.GUI;
+package com.jimdo.Fabian996.AdminInv2.GUI;
 
 import java.util.ArrayList;
 
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class DiffiInv implements CommandExecutor {
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
+
+public class DiffiGUI implements CommandExecutor {
 	
-	public Inventory Diffi = null;
 	
+	public DiffiGUI(AdminInv adminInv) {
+	}
+
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		Player p = (Player)cs;
 		if(cmd.getName().equalsIgnoreCase("diffis")){
-			if(p.hasPermission("AdminInv.Admin") || p.hasPermission("AdminInv.*")){
-				p.playSound(p.getLocation(), Sound.GHAST_FIREBALL, 1000.0F, 6.0F);
-				Diffi = p.getPlayer().getServer().createInventory(null, 18, "§0Difficulty Inventory");
+			if(p.hasPermission("admininv.admin") || p.hasPermission("admininv.*")){
+				AdminInv.Diffi = p.getPlayer().getServer().createInventory(null, 18, "§3Difficulty Inventar");
 				// Inventar Erstellt...
 				
 				// Icons im Inventar festlegen..
@@ -51,18 +52,18 @@ public class DiffiInv implements CommandExecutor {
 				ItemMeta Backmeta = Back.getItemMeta();
 				ArrayList<String> BM = new ArrayList<String>();
 				Backmeta.setDisplayName("§aBack");
-				BM.add("Back to Inventory");
+				BM.add("Zurück zum Inventar");
 				Backmeta.setLore(BM);
 				Back.setItemMeta(Backmeta);
 
-				Diffi.setItem(2, Peace);
-				Diffi.setItem(3, Easy);
-				Diffi.setItem(4, Normal);
-				Diffi.setItem(5, Hard);
+				AdminInv.Diffi.setItem(2, Peace);
+				AdminInv.Diffi.setItem(3, Easy);
+				AdminInv.Diffi.setItem(4, Normal);
+				AdminInv.Diffi.setItem(5, Hard);
 				
-				Diffi.setItem(9, Back);
+				AdminInv.Diffi.setItem(9, Back);
 				
-				p.getPlayer().openInventory(Diffi);
+				p.getPlayer().openInventory(AdminInv.Diffi);
 				}
 		}
 		return true;
