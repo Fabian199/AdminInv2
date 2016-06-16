@@ -1,14 +1,15 @@
 package com.jimdo.Fabian996.AdminInv2.Commands;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
-
-import net.minecraft.server.v1_9_R1.EntityPlayer;
 
 public class Ping implements CommandExecutor{
 
@@ -20,9 +21,18 @@ public class Ping implements CommandExecutor{
 	    return true;
 	}
 	
-	public int getPing(Player p){
-		CraftPlayer pingc = (CraftPlayer)p;
-		EntityPlayer pinge = pingc.getHandle();
-		return pinge.ping;
+	public static int getPing(Player p){
+		String v = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+		try{
+			Class<?> CraftPlayerClass = Class.forName("org.bukkit.craftbukkit." + v + ".entity.CraftPlayer");
+			Object CraftPlayer = CraftPlayerClass.cast(p);
+			Method getHandle = CraftPlayer.getClass().getMethod("getHandle", new Class[0]);
+			Object EntityPlayer = getHandle.invoke(CraftPlayer, new Object[0]);
+			Field ping = EntityPlayer.getClass().getDeclaredField("ping");
+			return ping.getInt(EntityPlayer);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }
