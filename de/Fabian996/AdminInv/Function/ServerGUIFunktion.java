@@ -1,4 +1,4 @@
-package de.Fabian996.AdminInv.Function;
+package com.jimdo.Fabian996.AdminInv2.Funktion;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -7,19 +7,23 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class ServerFunction implements Listener {
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
+
+public class ServerGUIFunktion implements Listener {
 	
-	public static final String Prefix = "§8[§4AdminInv§8]§r ";
-	
+
+	public ServerGUIFunktion(AdminInv adminInv) {
+	}
+
 	@EventHandler
 	public void Inventory(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
-		if(e.getInventory().getName().equalsIgnoreCase("§0Server Inventory")){
+		if(e.getInventory().getName().equalsIgnoreCase("§0Server Inventar")){
 			e.setCancelled(true);
 		
 			if(e.getCurrentItem().getType() == Material.BARRIER){
 				e.getView().close();
-				Bukkit.broadcastMessage(Prefix + "§4The Server stopt");
+				Bukkit.broadcastMessage(AdminInv.AdminPrefix + "§4Der Server stopt");
 				Bukkit.shutdown();
 			}
 			
