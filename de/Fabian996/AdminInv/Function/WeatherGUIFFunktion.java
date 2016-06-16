@@ -1,4 +1,4 @@
-package de.Fabian996.AdminInv.Function;
+package com.jimdo.Fabian996.AdminInv2.Funktion;
 
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -7,15 +7,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class WeatherFunction implements Listener {
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
-	public static final String Prefix = "§8[§4AdminInv§8]§r ";
+public class WeatherGUIFFunktion implements Listener {
+	
 
 	@SuppressWarnings("unused")
 	@EventHandler
 	public void Inventory(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
-		if(e.getInventory().getName().equalsIgnoreCase("§0Weather/Time Inventory")){
+		if(e.getInventory().getName().equalsIgnoreCase("§2Wetter/Zeit Inventar")){
 			e.setCancelled(true);
 		
 			// Weather Function
@@ -23,7 +24,7 @@ public class WeatherFunction implements Listener {
 				World world = p.getWorld();
 				p.getWorld().setStorm(true);
 				p.getWorld().setThundering(false);
-				p.sendMessage(Prefix + "§3It starts raining ");
+				p.sendMessage(AdminInv.AdminPrefix + "§3Es fängt an zu Regnen");
 				e.getView().close();
 			}
 			
@@ -31,7 +32,7 @@ public class WeatherFunction implements Listener {
 				World world = p.getWorld();
 				p.getWorld().setStorm(false);
 				p.getWorld().setThundering(false);
-				p.sendMessage(Prefix + "§3Now the weather stops ");
+				p.sendMessage(AdminInv.AdminPrefix  + "§3Das Wetter hört auf ");
 				e.getView().close();
 			}
 			
@@ -39,21 +40,21 @@ public class WeatherFunction implements Listener {
 				World world = p.getWorld();
 				p.getWorld().setStorm(true);
 				p.getWorld().setThundering(true);
-				p.sendMessage(Prefix + "§3It starts to thunderstorms ");
+				p.sendMessage(AdminInv.AdminPrefix  + "§3Es fängt an zu Gewittern");
 				e.getView().close();
 			}
 			
 			if(e.getCurrentItem().getType() == Material.DAYLIGHT_DETECTOR){
 				World world = p.getWorld();
 				p.getWorld().setTime(0);
-				p.sendMessage(Prefix + "In the §6" + world.getName() + " §fis now Day");
+				p.sendMessage(AdminInv.AdminPrefix  + "In der Welt §6" + world.getName() + " §fist nun Tag");
 				e.getView().close();
 			}
 			
 			if(e.getCurrentItem().getType() == Material.SOUL_SAND){
 				World world = p.getWorld();
 				p.getWorld().setTime(13000);
-				p.sendMessage(Prefix + "In the §6" + world.getName() + " §fis now Night");
+				p.sendMessage(AdminInv.AdminPrefix  + "In der Welt §6" + world.getName() + " §fist nun Nacht");
 				e.getView().close();
 			}
 			
