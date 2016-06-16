@@ -1,5 +1,7 @@
 package com.jimdo.Fabian996.AdminInv2.Listeners;
 
+import java.io.IOException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,12 +13,13 @@ import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 public class Reload implements Listener {
 	
 	@EventHandler
-	public void Reload(PlayerCommandPreprocessEvent e){
+	public void Reload(final PlayerCommandPreprocessEvent e) throws IOException{
 	    Player p = e.getPlayer();
 	    String command = e.getMessage();
 	    if (((command.equalsIgnoreCase("/rl")) || (command.equalsIgnoreCase("/reload"))) && (p.hasPermission("admininv.reload"))){
 	      Bukkit.broadcastMessage(AdminInv.SystemPrefix + "§c --| SERVER RELOAD |--");
 	      Bukkit.broadcastMessage(AdminInv.SystemPrefix + "§cBitte nicht bewegen, schreiben oder etwas abbauen!");
+	      AdminInv.getInstance().saveDefaultConfig();
 	      Bukkit.broadcastMessage(""); 
 	      Bukkit.reload();
 	      Bukkit.broadcastMessage("");
