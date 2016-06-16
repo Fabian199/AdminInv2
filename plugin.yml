@@ -1,5 +1,5 @@
 name: AdminInv2
-version: 1.0
+version: 1.2
 main: com.jimdo.Fabian996.AdminInv2.Main.AdminInv
 author: Fabian996
 website: http://bit.ly/1m13hON
@@ -19,7 +19,7 @@ commands:
     description: Zeigt die Spieler Information an
     
   br:
-    description: Senden einer Broadcast
+    description: Senden eines Broadcast
     
   cc:
     description: Loscht den Chat
@@ -31,7 +31,7 @@ commands:
     description: Du kannst dich heilen oder andere Spieler
     
   ping:
-    description: Zeigt dir den Ping an MC Version 1.9.x
+    description: Zeigt dir dein Ping an in allen MC Version 
     
   tc:
     description: Du kannst mit deinen Teammitglieder schreiben
@@ -53,12 +53,6 @@ commands:
     
   kick:
     description: Spieler kicken mit Grund vom server
-    
-  aban:
-    description: Spieler von Server Bannen
-
-  uban:
-    description: Spieler von Server Unbannen
 
   setinfo:
     description: Andern der Serverinformation
@@ -72,6 +66,34 @@ commands:
   r:
     description: Private Nachrichten senden
     
+  warp:
+    description: Erstellen von Warps und Teleportieren
+    aliases: [warps,delwarp,setwarp]
+
+  atp:
+    description: Teleportiern von Spielern oder Selber
+
+  admin:
+    description: Offnet das Admin GUI
+    
+  ghast:
+    description: Man bekommt das Admin GUI Item
+
+  diffis:
+  
+  gamem:
+
+  onlinep:
+
+  climate:
+
+  serverinv:
+
+  backup:
+    description: Server Backup erstellen
+
+  v:
+    description: 
 
 permissions:
   admininv.*:
@@ -92,3 +114,8 @@ permissions:
       admininv.ban: true
       admininv.setinfo: true
       admininv.rename: true
+      admininv.warp: true
+      admininv.teleport: true
+      admininv.ignore: true
+      admininv.backup: true
+      admininv.vanish: true
