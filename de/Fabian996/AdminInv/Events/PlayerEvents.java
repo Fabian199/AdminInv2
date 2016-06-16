@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
@@ -18,7 +19,9 @@ public class PlayerEvents implements Listener{
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         String msg = e.getMessage();
         for (String word : AdminInv.Blacklist) {
-            msg = msg.replaceAll("(?i)" + word, "§cLeider dürfen sie das Wort nicht schreiben!");
+            msg = msg.replaceAll(word, "§c********** §r");
+
+            e.setCancelled(true);
         }
         e.setMessage(msg);
         
@@ -32,6 +35,15 @@ public class PlayerEvents implements Listener{
 				}
 			}
 		}
+		
+		if(AdminInv.mute){
+			if((!p.isOp()) || p.hasPermission("admininv.mute")){
+				e.setCancelled(true);
+			}else{
+				e.setCancelled(false);
+			}
+		}
+		
     }
 	
 	@EventHandler(priority = EventPriority.HIGH)
@@ -53,6 +65,15 @@ public class PlayerEvents implements Listener{
 			String TeamSpeak = AdminInv.cfg.getString("serverinfo.teamspeak");
 			p.kickPlayer("§4§lDu bist permanent vom Server gebannt\n \n§r§4§lGrund: §r§2" +  Grund + "\n\n§6Bitte melde dich im Forum oder im TS \n§4§lForum:§r§8" + Forum + "\n§4§lTeamSpeak:§r§8" + TeamSpeak);
 		}
+		
+		for (Player p1 : AdminInv.Vanished){
+			e.getPlayer().hidePlayer(p1);
+		}
+	}
+	
+	@EventHandler
+	public void onLeave(PlayerQuitEvent e){
+		AdminInv.Vanished.remove(e.getPlayer());
 	}
 	
 	@EventHandler
