@@ -1,21 +1,30 @@
-package de.Fabian996.AdminInv.Function;
+package com.jimdo.Fabian996.AdminInv2.Funktion;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class OnlinePlayerFunction implements Listener {
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
 
-	public static final String Prefix = "§8[§4AdminInv§8]§r ";
+public class OnlinePlayerFunktion implements Listener {
+
+	public OnlinePlayerFunktion(AdminInv adminInv) {
+	}
 	
-	@SuppressWarnings("unused")
+	
 	@EventHandler
 	public void Inventory(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
 		if(e.getInventory().getName().equalsIgnoreCase("§7>> §0Online Players §7<<")){
 			e.setCancelled(true);
 		
+		}
+		
+		if(e.getCurrentItem().getType() == Material.GOLD_NUGGET){
+			e.getView().close();
+			p.performCommand("admin");
 		}
 	}
 }
