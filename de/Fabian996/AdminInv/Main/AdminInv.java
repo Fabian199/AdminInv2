@@ -160,9 +160,9 @@ public class AdminInv extends JavaPlugin implements Listener,CommandExecutor{
 		
 		saveConfig();
 		
-	    wartungs = (getConfig().get("Wartung.Status") != null ? getConfig().getBoolean("Wartung.Status") : false);
+		wartungs = (getConfig().get("Wartung.Status") != null ? getConfig().getBoolean("Wartung.Status") : false);
 
-	    registerConfig();
+		registerConfig();
 		registerCommands();
 		registerListener();
 		registerBlacklist();
@@ -173,10 +173,10 @@ public class AdminInv extends JavaPlugin implements Listener,CommandExecutor{
 	public void registerAutoSetup() {
 		AutoBackup.startAutoBackup();
 
-	    StartMySQL();
+		StartMySQL();
 	    
 		this.Interval = cfg.getInt("AutoBroadcast.Interval");
-	    List<String> tempArray = getConfig().getStringList("AutoBroadcast.Nachrichten");
+		List<String> tempArray = getConfig().getStringList("AutoBroadcast.Nachrichten");
 		List<String> blist = new ArrayList<>();
 		for(String s :tempArray){
 			blist.add(ChatColor.translateAlternateColorCodes('&', s));
@@ -299,16 +299,16 @@ public class AdminInv extends JavaPlugin implements Listener,CommandExecutor{
 	
 	public void  Metrics(){
 		if (getConfig().getString("Metrics.Status") != null) {
-            try {
-                Metrics metrics = new Metrics(this);
-                metrics.start();
-                getLogger().info("Metrics succesfull" + "\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.severe("[AdminInv 2] Metrics Failed to Start!");
-            }
+            	try {
+                	Metrics metrics = new Metrics(this);
+        		metrics.start();
+        		getLogger().info("Metrics succesfull" + "\n");
+        	}catch (IOException e) {
+                	e.printStackTrace();
+                	log.severe("[AdminInv 2] Metrics Failed to Start!");
+        	}
         } else {
-            getLogger().info("Metrics wasn't started because it is disabled in the config!" + "\n");
+	     getLogger().info("Metrics wasn't started because it is disabled in the config!" + "\n");
         }
     }
 
