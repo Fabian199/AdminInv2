@@ -1,24 +1,30 @@
-package de.Fabian996.AdminInv.Handler;
+package com.jimdo.Fabian996.AdminInv2.Funktion;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class Ghast implements Listener {
+import com.jimdo.Fabian996.AdminInv2.Main.AdminInv;
+
+public class GUIItemFunktion implements Listener{
+
+	AdminInv p;
 	
+	public GUIItemFunktion(AdminInv adminInv) {
+		this.p = adminInv;
+	}
+	
+	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onGhastClick(PlayerInteractEvent e)
-	{
+	public void onChestClick(PlayerInteractEvent e){
 		if((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)){
 			if(e.getPlayer().getItemInHand().getType() == Material.GHAST_TEAR){
-					Player p = e.getPlayer();
-					p.playSound(p.getLocation(), Sound.FIREWORK_BLAST, 1000.0F, 6.0F);
-					Bukkit.dispatchCommand(p.getPlayer(), "admin");	
+				Player p = e.getPlayer();
+				Bukkit.dispatchCommand(p.getPlayer(), "admin");	
 			}
 		}
 	}
