@@ -15,17 +15,27 @@ Wartung:
     Status: false
     Message: Der Server befindet sich gerade im Wartungsmodus
 
+AutoBackup:
+    Interval: 60
+
+AutoBroadcast:
+    Status: false
+    Interval: 180
+    Nachrichten:
+        - '&6Nachricht1'
+        - 'Nachricht2'
+
 ############################################################
 # +------------------------------------------------------+ #
 # |              Vote Links Configuration                | #
 # +------------------------------------------------------+ #
 ############################################################
-vote:
-    message1: Link1
-    message2: Link2
-    message3: Link3
-    message4: Link4
-    message5: Link5
+Voten:
+    Nachricht: Link1
+    Nachricht1: Link2
+    Nachricht2: Link3
+    Nachricht3: Link4
+    Nachricht4: Link5
     
 ############################################################
 # +------------------------------------------------------+ #
@@ -40,20 +50,20 @@ serverinfo:
 
 ############################################################
 # +------------------------------------------------------+ #
-# |                 Message Configuration                | #
+# |             Nachrichten Configuration                | #
 # +------------------------------------------------------+ #
 ############################################################ 
-Message:
-    KickMessage: '&6%target% &7wurde vom Server gekickt'
+Nachrichten:
+    KickNachricht: '&6%target% &7wurde vom Server gekickt'
 
 ############################################################
 # +------------------------------------------------------+ #
-# |              Inventory Configuration                 | #
+# |               Inventar Configuration                 | #
 # +------------------------------------------------------+ #
 ############################################################
-Inventory:
+Inventar:
     ExtraInv: false
-    
+
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -61,6 +71,5 @@ Inventory:
 # +------------------------------------------------------+ #
 ############################################################
 Einstellung:
-    Chat_Log: true
-    Command_Log: true
-    
+    Chat_Log: false
+    Command_Log: false
