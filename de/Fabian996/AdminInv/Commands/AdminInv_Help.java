@@ -53,10 +53,11 @@ public class AdminInv_Help implements CommandExecutor{
 						 p.sendMessage(AdminInv.AdminPrefix + "§3/pinfo §7<§5Spieler§7> §6- §fZeigt die Spieler Information");
 						 p.sendMessage(AdminInv.AdminPrefix + "§3/br §7<§5Nachricht§7> §6- §fSenden einer BR Nachricht");
 						 p.sendMessage(AdminInv.AdminPrefix + "§3/cc §6- §fLöscht den Chat");
-						 p.sendMessage(AdminInv.AdminPrefix + "§3/gmute §6- §fAktivieren des Gloabel Mute");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/glmute §6- §fAktivieren des Gloabel Mute");
 						 p.sendMessage(AdminInv.AdminPrefix + "§3/heal §7<§5Spieler§7> §6- §fSpieler Heilen oder sich Selbst");
 						 p.sendMessage(AdminInv.AdminPrefix + "§3/tc §6- §fUm im Teamchat schreiben");
 						 p.sendMessage(AdminInv.AdminPrefix + "§3/wartung §7<§5on§6/§5off§7> §6- §fWartungsmodus an/aus");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/setinfo §7<§5forum§57/§5ts§7/§5website§7> §6- §fServerInformation ändern");
 						 p.sendMessage(AdminInv.AdminPrefix + " ");
 						 p.sendMessage(AdminInv.AdminPrefix + "§fNutze §6§l/ahelp 4 §rfür die nächste Seite");
 						 p.sendMessage(AdminInv.AdminPrefix + "§8----------- §4Admin Befehle §7[§31/3§7]§8 -----------");
@@ -66,7 +67,17 @@ public class AdminInv_Help implements CommandExecutor{
 				 if(args[0].equalsIgnoreCase("4")){
 					 if(p.hasPermission("admininv.admin") || (p.hasPermission("admininv.*"))){
 						 p.sendMessage(AdminInv.AdminPrefix + "§8----------- §4Admin Befehle §7[§32/3§7]§8 -----------");
-						 p.sendMessage(AdminInv.AdminPrefix + "§3/invsee §7<§5Spieler§7> §6- §f Öffnet das Inventar");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/invsee §7<§5Spieler§7> §6- §fÖffnet das Inventar");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/atp §7<§5Spieler§7> §7<§5Spieler2§7> §6- §fTeleportieren");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/setwarp §7<§5warpname§7> §6- §fErstellen von Warps");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/delwarp §7<§5warpname§7> §6- §fLöschen von Warps");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/kick §7<§5Spieler§7> §7<§5Grund§7> §6- §fSpieler Kicken");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/rename §7<§5Itemname§7> §6- §fNamen ändern vom Item");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/aspy §6- §fBefehl Spy von Spielern");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/areload §6- §fConfig neuladen");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/ahelp §6- §fBefehls hilfe");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/backup §6- §fErstellen eines Backup´s");
+						 p.sendMessage(AdminInv.AdminPrefix + "§3/v §6- §fUnsichbar machen für Spieler");
 						 p.sendMessage(AdminInv.AdminPrefix + " ");
 						 p.sendMessage(AdminInv.AdminPrefix + "§8----------- §4Admin Befehle §7[§32/3§7]§8 -----------");
 					 }
